@@ -2,18 +2,21 @@ using UnityEngine;
 using System.Collections;
 
 public class Movement : MonoBehaviour {
-	// The player's speed
+	public Transform you;
 	public float speed = 40;
 	
-	// Use this for initialization
-	void Awake () {
-		
+	void setPlayer(Transform you) {
+		this.you = you;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-			float xTranslation = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-			float zTranslation = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-			transform.position += new Vector3(xTranslation, 0, zTranslation);
+		if (you != null) {
+			float zTranslation = Input.GetAxis("Vertical") * speed;
+			float xTranslation = Input.GetAxis("Horizontal") * speed;
+			zTranslation *= Time.deltaTime;
+			xTranslation *= Time.deltaTime;
+			you.position += new Vector3(xTranslation, 0, zTranslation);
+		}
 	}
 }
