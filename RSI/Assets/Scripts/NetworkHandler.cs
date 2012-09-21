@@ -30,7 +30,7 @@ public class NetworkHandler : MonoBehaviour
 					MasterServer.RegisterHost("Red Space Island", gameName, "Closed");
 					Network.RemoveRPCsInGroup(0);
 					// Need to update when we get character select screen
-					networkView.RPC( "LoadLevel", RPCMode.AllBuffered, "PrototypeNetworked", 1);
+					networkView.RPC( "LoadLevel", RPCMode.AllBuffered, "Level1", 1);
 				}
 			}
 		}

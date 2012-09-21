@@ -2,21 +2,28 @@ using UnityEngine;
 using System.Collections;
 
 public class Movement : MonoBehaviour {
-	public Transform you;
-	public float speed = 40;
+	// player speed
+	public float speed = 4;
+	public Transform mainCamera;
 	
-	void setPlayer(Transform you) {
-		this.you = you;
+	void Start () {
+		mainCamera = GameObject.Find ("Main Camera").transform;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (you != null) {
-			float zTranslation = Input.GetAxis("Vertical") * speed;
-			float xTranslation = Input.GetAxis("Horizontal") * speed;
-			zTranslation *= Time.deltaTime;
-			xTranslation *= Time.deltaTime;
-			you.position += new Vector3(xTranslation, 0, zTranslation);
+		float xTranslation = Input.GetAxis("Horizontal") * speed;
+		float zTranslation = Input.GetAxis("Vertical") * speed;
+		xTranslation *= Time.deltaTime;
+		zTranslation *= Time.deltaTime;
+		if (transform.position.x - mainCamera.position.x <= -12 && xTranslation < 0) {
+			xTranslation = 0;
 		}
+		if (transform.position.z >= 13 && zTranslation > 0) {
+			zTranslation = 0;
+		} else if (transform.position.z <= 0 && zTranslation < 0) {
+			zTranslation = 0;
+		}
+		transform.position += new Vector3(xTranslation, 0, zTranslation);
 	}
 }

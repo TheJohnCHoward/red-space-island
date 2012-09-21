@@ -1,12 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PrototypeLevel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CameraMovement.cs">
     <Files>
-      <File FileName="..\..\..\Prototype map\Assets\Scripts\Instantiate.cs" Line="56" Column="3" />
-      <File FileName="..\..\..\Prototype map\Assets\Scripts\Control.cs" Line="15" Column="41" />
-      <File FileName="Assets\Scripts\NetworkHandler.cs" Line="1" Column="1" />
+      <File FileName="..\..\..\Prototype map\Assets\Scripts\Instantiate.cs" Line="51" Column="14" />
+      <File FileName="..\..\..\Prototype map\Assets\Scripts\Control.cs" Line="13" Column="50" />
+      <File FileName="..\..\..\enemy ai\red-space-island\RSI\Assets\Scripts\EnemyScript.cs" Line="90" Column="8" />
+      <File FileName="Assets\Scripts\NetworkHandler.cs" Line="33" Column="64" />
+      <File FileName="Assets\Scripts\Movement.cs" Line="19" Column="58" />
       <File FileName="Assets\Scripts\PrototypeLevel.cs" Line="12" Column="17" />
-      <File FileName="Assets\Scripts\Movement.cs" Line="19" Column="48" />
+      <File FileName="Assets\Scripts\Level1.cs" Line="15" Column="86" />
+      <File FileName="Assets\Scripts\CameraMovement.cs" Line="30" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
