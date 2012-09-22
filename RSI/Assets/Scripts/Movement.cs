@@ -4,6 +4,7 @@ using System.Collections;
 public class Movement : MonoBehaviour {
 	// player speed
 	public float speed = 4;
+	public float bounds = 6;
 	public Transform mainCamera;
 	
 	void Start () {
@@ -16,7 +17,7 @@ public class Movement : MonoBehaviour {
 		float zTranslation = Input.GetAxis("Vertical") * speed;
 		xTranslation *= Time.deltaTime;
 		zTranslation *= Time.deltaTime;
-		if (transform.position.x - mainCamera.position.x <= -12 && xTranslation < 0) {
+		if (transform.position.x - mainCamera.position.x <= -bounds && xTranslation < 0) {
 			xTranslation = 0;
 		}
 		if (transform.position.z >= 13 && zTranslation > 0) {
