@@ -15,10 +15,7 @@ public class Taft : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown ("Jump")) {
-			health -= 10;
-		}
-		if (health == 0) {
+		if (health <= 0) {
 			Network.Destroy (this.gameObject);
 		}
 	}
@@ -28,5 +25,17 @@ public class Taft : MonoBehaviour {
 		GUI.Label(new Rect(Screen.width - 305, 15, 290, 20), "", style);
 		GUI.Label(new Rect(Screen.width - 305 + health / maxHealth * 290, 15, (maxHealth - health) / maxHealth * 290, 20), "", style2);
 		GUI.Box(new Rect(Screen.width - 310, 10, 300, 30), "Taft");
+	}
+	
+	void OnCollisionEnter(Collision other){
+		print("This happening");
+		if(other.transform.tag=="Projectile"){
+			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
+			
+			health-= proj.damageAmount;
+			if(health<0){
+				Destroy(gameObject);
+			}
+		}
 	}
 }

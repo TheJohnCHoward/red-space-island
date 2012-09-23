@@ -1,10 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\Prototype map\Assets\Scripts\Instantiate.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Taft.cs">
     <Files>
-      <File FileName="..\..\..\Prototype map\Assets\Scripts\Instantiate.cs" Line="51" Column="14" />
-      <File FileName="..\..\..\Prototype map\Assets\Scripts\Control.cs" Line="13" Column="50" />
-      <File FileName="..\..\..\enemy ai\red-space-island\RSI\Assets\Scripts\EnemyScript.cs" Line="90" Column="8" />
+      <File FileName="Assets\Scripts\Teddy.cs" Line="18" Column="3" />
+      <File FileName="Assets\Scripts\NetworkHandler.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Movement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PrototypeLevel.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Taft.cs" Line="15" Column="2" />
+      <File FileName="Assets\Scripts\LevelBase.cs" Line="23" Column="2" />
+      <File FileName="Assets\Scripts\BasicEnemy.cs" Line="9" Column="21" />
+      <File FileName="Assets\Scripts\PlayerHealthTest.cs" Line="7" Column="2" />
+      <File FileName="Assets\Scripts\Projectile.cs" Line="22" Column="9" />
+      <File FileName="Assets\Scripts\EnemyScript.cs" Line="18" Column="36" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -15,10 +15,7 @@ public class Teddy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown ("Jump")) {
-			health -= 10;
-		}
-		if (health == 0) {
+		if (health <= 0) {
 			Network.Destroy (this.gameObject);
 		}
 	}
@@ -28,5 +25,17 @@ public class Teddy : MonoBehaviour {
 		GUI.Label(new Rect(15, 15, 290, 20), "", style);
 		GUI.Label(new Rect(15 + health / maxHealth * 290, 15, (100 - health) / maxHealth * 290, 20), "", style2);
 		GUI.Box(new Rect(10, 10, 300, 30), "Teddy");
+	}
+	
+	void OnCollisionEnter(Collision other){
+		print("This happening");
+		if(other.transform.tag=="Projectile"){
+			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
+			
+			health-= proj.damageAmount;
+			if(health<0){
+				Destroy(gameObject);
+			}
+		}
 	}
 }

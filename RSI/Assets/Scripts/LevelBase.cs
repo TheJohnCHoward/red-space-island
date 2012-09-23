@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class Level1 : MonoBehaviour {
+public class LevelBase : MonoBehaviour {
 	public Transform teddy;
 	public Transform taft;
 	public Transform spawn1;
 	public Transform spawn2;
-	public Transform mainCamera;
 
 	// Use this for initialization
 	void Start () {
