@@ -44,14 +44,6 @@ public class Projectile : MonoBehaviour {
 	void OnCollisionEnter(Collision other){
 		
 		if(other.transform.tag=="Player"){
-			//Hurt the player
-			PlayerHealthTest health = other.transform.gameObject.GetComponent("PlayerHealthTest") as PlayerHealthTest;
-			health.health-= damageAmount;
-			
-			if(health.health<0){
-				Destroy(other.transform.gameObject);
-			}
-			
 			Destroy(gameObject);
 		}
 	}

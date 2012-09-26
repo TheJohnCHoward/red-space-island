@@ -33,7 +33,7 @@ public class Teddy : MonoBehaviour {
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
 			
 			health-= proj.damageAmount;
-			if(health<0){
+			if(health<=0){
 				Destroy(gameObject);
 			}
 		}
