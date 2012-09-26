@@ -93,7 +93,12 @@ public class EnemyScript : BasicEnemy {
 		}
 	}
 	
-
-	
+	public void applyDamage(int amount) {
+		print ("test2");
+		health -= amount;
+		if (health <= 0) {
+			Network.Destroy (gameObject);
+		}
+	}
 	
 }

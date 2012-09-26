@@ -1,17 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Projectile.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Attack.cs">
     <Files>
-      <File FileName="Assets\Scripts\Teddy.cs" Line="28" Column="3" />
-      <File FileName="Assets\Scripts\NetworkHandler.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Movement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Teddy.cs" Line="33" Column="90" />
+      <File FileName="Assets\Scripts\NetworkHandler.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PrototypeLevel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Taft.cs" Line="19" Column="38" />
+      <File FileName="Assets\Scripts\Taft.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\LevelBase.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BasicEnemy.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerHealthTest.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Projectile.cs" Line="46" Column="37" />
-      <File FileName="Assets\Scripts\EnemyScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Attack.cs" Line="19" Column="38" />
+      <File FileName="Assets\Scripts\EnemyScript.cs" Line="93" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
