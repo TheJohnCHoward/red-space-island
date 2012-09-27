@@ -12,13 +12,13 @@ public class EnemyScript : BasicEnemy {
 	public float mvmtSpeed = 8f;
 	private float coolDownTimer = 0.0f;
 	public float coolDownTime = 1.0f;
-	
+	public GameObject player;
 	
 	
 	// Update is called once per frame
 	void Update () {
 		//Check first if you're in range to hit a player
-		GameObject player = getPlayerInRange(rangeOfWeapon);
+		player = getPlayerInRange(rangeOfWeapon);
 		
 		if(player!=null){
 			movementState=MovementState.Firing;
@@ -36,11 +36,13 @@ public class EnemyScript : BasicEnemy {
 			movementState=MovementState.Walking;
 			player = FindClosestPlayer();
 			
+			
 			//Move toward it
 			if(player!=null){
 				
 				//Move z first, if not equal
-				if(transform.position.z-player.transform.position.z<0.1){
+				if(Mathf.Abs(transform.position.z-player.transform.position.z)<0.1){
+					
 					Vector3 positionToGoTo = transform.position;
 					positionToGoTo.z = player.transform.position.z;
 					
@@ -50,7 +52,7 @@ public class EnemyScript : BasicEnemy {
 				else{
 					transform.position= Vector3.Lerp(transform.position,player.transform.position,mvmtSpeed*Time.deltaTime);
 				}
-				
+				//player=null;
 			}
 			//Stand still
 			else{
@@ -64,13 +66,17 @@ public class EnemyScript : BasicEnemy {
 		RaycastHit hit;
 		
 		if(Physics.Raycast(transform.position, Vector3.left, out hit)){
-			if(hit.collider.tag=="Player"){
-				return hit.collider.gameObject;
+			if(hit.collider.gameObject.tag=="Player"){
+				if(((hit.collider.gameObject.transform.position.x-transform.position.x)<rangeOfWeapon)){
+					return hit.collider.gameObject;
+				}
 			}
 		}
 		if(Physics.Raycast(transform.position, Vector3.right, out hit)){
-			if(hit.collider.tag=="Player"){
-				return hit.collider.gameObject;
+			if(hit.collider.gameObject.tag=="Player"){
+				if(((transform.position.x-hit.collider.gameObject.transform.position.x)<rangeOfWeapon)){
+						return hit.collider.gameObject;
+				}
 			}
 		}
 		

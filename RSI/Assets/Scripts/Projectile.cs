@@ -12,7 +12,6 @@ public class Projectile : MonoBehaviour {
 		if(shooting){
 			Vector3 difference = destination-transform.position;
 			
-			print("Difference.sqrMagnitude: "+difference.sqrMagnitude);
 			
 			//sqrMagnitude is cheaper to call than magnitude
 			if(difference.sqrMagnitude>1){

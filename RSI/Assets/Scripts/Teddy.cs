@@ -28,7 +28,7 @@ public class Teddy : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter(Collision other){
-		print("This happening");
+		
 		if(other.transform.tag=="Projectile"){
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
 			
