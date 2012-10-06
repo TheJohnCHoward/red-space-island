@@ -11,7 +11,6 @@ public class EnemySpawnPoint : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		if(other.tag=="Player"){
-			print("Trigger minion spawn");
 			
 			for(int i = 0; i<enemiesSpawned.Length; i++){
 				if(spawnPoints.Length!=0){

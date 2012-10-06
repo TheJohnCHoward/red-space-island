@@ -8,19 +8,29 @@ public class EnemyScript : BasicEnemy {
 	public Projectile projectile;
 	public enum MovementState{Walking, Firing, TakingDamage, Standing};
 	public MovementState movementState;
-	public float speedOfProjectile, distanceOfProjectile;
+	public float speedOfProjectile;
 	public float mvmtSpeed = 8f;
 	private float coolDownTimer = 0.0f;
 	public float coolDownTime = 1.0f;
+	private float playerTimer =1.5f;
 	public GameObject player;
 	
+	
+	void Start(){
+		coolDownTimer=coolDownTime;
+	}
 	
 	// Update is called once per frame
 	void Update () {
 		//Check first if you're in range to hit a player
-		player = getPlayerInRange(rangeOfWeapon);
+		GameObject playerHolder = FindClosestPlayer(rangeOfVision);
 		
-		if(player!=null){
+		if(playerHolder!=null){
+			player=playerHolder;
+		}
+		
+		if(isPlayerInRange(player,rangeOfWeapon,1.0f)){
+			print("ever happening?");
 			movementState=MovementState.Firing;
 			//Add a small cooldown time to avoid endless spam
 			if(coolDownTimer<=0.0f){
@@ -31,28 +41,27 @@ public class EnemyScript : BasicEnemy {
 				coolDownTimer-=Time.deltaTime;
 			}
 		}
-		//If that fails, try finding a player
+		//If out of weapon range
 		else{
 			movementState=MovementState.Walking;
-			player = FindClosestPlayer();
-			
-			
-			//Move toward it
-			if(player!=null){
+			//Move toward it if in vision range
+			if(isPlayerInRange(player,rangeOfVision,rangeOfVision)){
 				
 				//Move z first, if not equal
-				if(Mathf.Abs(transform.position.z-player.transform.position.z)<0.1){
+				if(Mathf.Abs(transform.position.z-player.transform.position.z)>1.0f){
 					
 					Vector3 positionToGoTo = transform.position;
 					positionToGoTo.z = player.transform.position.z;
 					
-					transform.position = Vector3.Lerp(transform.position,positionToGoTo,mvmtSpeed*Time.deltaTime);
+					transform.position = Vector3.Lerp(transform.position,positionToGoTo,4*mvmtSpeed*Time.deltaTime);
 				}
 				//If equal to z, move closer
 				else{
-					transform.position= Vector3.Lerp(transform.position,player.transform.position,mvmtSpeed*Time.deltaTime);
+					if((Mathf.Abs(player.transform.position.x-transform.position.x))>rangeOfWeapon){
+						transform.position= Vector3.Lerp(transform.position,player.transform.position,mvmtSpeed*Time.deltaTime);
+					}
 				}
-				//player=null;
+				
 			}
 			//Stand still
 			else{
@@ -62,40 +71,43 @@ public class EnemyScript : BasicEnemy {
 	}
 	
 	//Returns a player if one is in range, null otherwise
-	private GameObject getPlayerInRange(float x){
-		RaycastHit hit;
+	private bool isPlayerInRange(GameObject guy, float xMaxDiff, float zMaxDiff){
 		
-		if(Physics.Raycast(transform.position, Vector3.left, out hit)){
-			if(hit.collider.gameObject.tag=="Player"){
-				if(((hit.collider.gameObject.transform.position.x-transform.position.x)<rangeOfWeapon)){
-					return hit.collider.gameObject;
-				}
-			}
-		}
-		if(Physics.Raycast(transform.position, Vector3.right, out hit)){
-			if(hit.collider.gameObject.tag=="Player"){
-				if(((transform.position.x-hit.collider.gameObject.transform.position.x)<rangeOfWeapon)){
-						return hit.collider.gameObject;
-				}
+		float zDiff = Mathf.Abs(transform.position.z-guy.transform.position.z);
+		
+		if(zDiff<zMaxDiff){
+			float xDiff = Mathf.Abs(transform.position.x-guy.transform.position.x);
+			if(xDiff<xMaxDiff){
+				return true;
 			}
 		}
 		
-		return null;
+		return false;
 	}
 	
 	
 	//Should the bullet
 	private void fireWeapon(GameObject player){
-		
 		//Player on right
 		//Seperating them as later we might want to specify a start position based on which side it is
+		//player on right
 		if(transform.position.x<player.transform.position.x){
-			Projectile proj = Instantiate(projectile,transform.position,transform.rotation) as Projectile;
-			proj.shoot(false,speedOfProjectile,distanceOfProjectile);
+		
+			Vector3 spawnPos = transform.position;
+			spawnPos.z=player.transform.position.z;
+			spawnPos.x+=0.5f;
+			
+			
+			Projectile proj = Instantiate(projectile,spawnPos,transform.rotation) as Projectile;
+			proj.shoot(false,speedOfProjectile,rangeOfWeapon);
 		}
 		else{
-			Projectile proj = Instantiate(projectile,transform.position,transform.rotation) as Projectile;
-			proj.shoot(true,speedOfProjectile,distanceOfProjectile);
+			Vector3 spawnPos = transform.position;
+			spawnPos.z=player.transform.position.z;
+			spawnPos.x-=0.5f;
+			
+			Projectile proj = Instantiate(projectile,spawnPos,transform.rotation) as Projectile;
+			proj.shoot(true,speedOfProjectile,rangeOfWeapon);
 		}
 	}
 	

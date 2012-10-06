@@ -44,8 +44,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Animation\AnimatedSpriteSheet.cs" />
+     <Compile Include="Assets\Scripts\Animation\PlayerAnimationManager.cs" />
+     <Compile Include="Assets\Scripts\Animation\SpriteSheetInformation.cs" />
      <Compile Include="Assets\Scripts\Attack.cs" />
      <Compile Include="Assets\Scripts\BasicEnemy.cs" />
+     <Compile Include="Assets\Scripts\BombProjectile.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\EnemyScript.cs" />
      <Compile Include="Assets\Scripts\EnemySpawnPoint.cs" />

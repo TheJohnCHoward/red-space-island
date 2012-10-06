@@ -4,14 +4,13 @@ using System.Collections;
 public class Projectile : MonoBehaviour {
 	public bool shooting;
 	public int damageAmount;
-	private float speed = 5.0f;
+	private float speed = 3.0f;
 	private Vector3 destination;
 	
 	// Update is called once per frame
-	void Update () {
+	public virtual void Update () {
 		if(shooting){
 			Vector3 difference = destination-transform.position;
-			
 			
 			//sqrMagnitude is cheaper to call than magnitude
 			if(difference.sqrMagnitude>1){
@@ -19,13 +18,17 @@ public class Projectile : MonoBehaviour {
 				
 			}
 			else{
-				Destroy(gameObject);
+				Explode();
 			}
 		}
 	}
 	
+	public virtual void Explode(){
+		Destroy(gameObject);
+	}
+	
 	//To be called when the projectile is instantiated
-	public void shoot(bool shootingLeft, float speed, float distance){
+	public virtual void shoot(bool shootingLeft, float speed, float distance){
 		shooting=true;
 		this.speed=speed;
 		
@@ -40,12 +43,14 @@ public class Projectile : MonoBehaviour {
 		
 	}
 	
-	void OnCollisionEnter(Collision other){
+	public virtual void OnCollisionEnter(Collision other){
 		
 		if(other.transform.tag=="Player"){
 			Destroy(gameObject);
 		}
 	}
+	
+	
 	
 	
 	

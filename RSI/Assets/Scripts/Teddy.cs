@@ -6,7 +6,7 @@ public class Teddy : MonoBehaviour {
 	public float maxHealth = 100;
 	public GUIStyle style;
 	public GUIStyle style2;
-	
+	public PlayerAnimationManager animation;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +18,23 @@ public class Teddy : MonoBehaviour {
 		if (health <= 0) {
 			Network.Destroy (this.gameObject);
 		}
+		
+		
+		if(Input.GetKey(KeyCode.LeftArrow)){
+			animation.setAnimation("Left");
+			animation.run=true;
+		}
+		else if(Input.GetKey(KeyCode.RightArrow)){
+			animation.setAnimation("Right");
+			animation.run=true;
+		}
+		else if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)){
+			animation.run=true;
+		}
+		else{
+			animation.run=false;
+		}
+		
 	}
 	
 	void OnGUI() {
@@ -28,6 +45,18 @@ public class Teddy : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter(Collision other){
+		
+		if(other.transform.tag=="Projectile"){
+			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
+			
+			health-= proj.damageAmount;
+			if(health<=0){
+				Destroy(gameObject);
+			}
+		}
+	}
+	
+	void OnTriggerEnter(Collider other){
 		
 		if(other.transform.tag=="Projectile"){
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
