@@ -30,7 +30,7 @@ public class EnemyScript : BasicEnemy {
 		}
 		
 		if(isPlayerInRange(player,rangeOfWeapon,1.0f)){
-			print("ever happening?");
+			//print("ever happening?");
 			movementState=MovementState.Firing;
 			//Add a small cooldown time to avoid endless spam
 			if(coolDownTimer<=0.0f){
@@ -112,7 +112,7 @@ public class EnemyScript : BasicEnemy {
 	}
 	
 	public void applyDamage(int amount) {
-		print ("test2");
+		//print ("test2");
 		health -= amount;
 		if (health <= 0) {
 			Network.Destroy (gameObject);

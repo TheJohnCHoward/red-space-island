@@ -6,8 +6,9 @@ public class Taft : MonoBehaviour {
 	public float maxHealth = 100;
 	public GUIStyle style;
 	public GUIStyle style2;
+	public PlayerAnimationManager animation;
+	private bool facingRight, punching;
 	
-
 	// Use this for initialization
 	void Start () {
 	
@@ -18,6 +19,57 @@ public class Taft : MonoBehaviour {
 		if (health <= 0) {
 			Network.Destroy (this.gameObject);
 		}
+		
+		if(!punching){
+			if(Input.GetKey(KeyCode.LeftArrow)){
+				animation.setAnimation("Left");
+				animation.run=true;
+				facingRight=false;
+			}
+			else if(Input.GetKey(KeyCode.RightArrow)){
+				animation.setAnimation("Right");
+				animation.run=true;
+				facingRight=true;
+			}
+			else if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)){
+				animation.run=true;
+			}
+			else{
+				animation.run=false;
+			}
+		}
+		if(Input.GetButtonDown("Light")){
+			punching=true;
+			if(facingRight){
+				animation.setAnimation("PunchRight",false);
+			}
+			else{
+				animation.setAnimation("PunchLeft",false);
+			}
+		}
+		
+		if (punching) {
+			//print ("test");
+			print("Punch");
+			if(facingRight){
+				//animation.setAnimation("PunchRight",false);
+			}
+			else{
+				//animation.setAnimation("PunchLeft", false);
+			}
+			
+			if(!animation.quickRun){
+				if(facingRight){
+					animation.setAnimation("Right");
+				}
+				else{
+					animation.setAnimation("Left");
+				}
+				
+				punching=false;
+			}
+		}
+		
 	}
 	
 	void OnGUI() {
@@ -28,7 +80,7 @@ public class Taft : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter(Collision other){
-		print("This happening");
+		//print("This happening");
 		if(other.transform.tag=="Projectile"){
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
 			

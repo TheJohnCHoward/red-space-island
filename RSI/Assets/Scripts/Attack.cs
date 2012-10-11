@@ -15,7 +15,7 @@ public class Attack : MonoBehaviour {
 
 	void OnTriggerStay(Collider other) {
 		if (Input.GetButtonDown("Light")) {
-			print ("test");
+			//print ("test");
 			other.SendMessage("applyDamage", 5, SendMessageOptions.DontRequireReceiver);
 		}
 	}
