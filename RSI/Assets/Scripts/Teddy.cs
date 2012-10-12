@@ -21,17 +21,18 @@ public class Teddy : MonoBehaviour {
 		}
 		
 		if(!punching){
-			if(Input.GetKey(KeyCode.LeftArrow)){
+			if(Input.GetAxis("Horizontal")==-1){
 				animation.setAnimation("Left");
 				animation.run=true;
 				facingRight=false;
 			}
-			else if(Input.GetKey(KeyCode.RightArrow)){
+			else if(Input.GetAxis("Horizontal") == 1){
 				animation.setAnimation("Right");
 				animation.run=true;
 				facingRight=true;
 			}
-			else if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)){
+			//Check if Button is down
+			else if(Mathf.Abs(Input.GetAxis("Vertical"))==1){
 				animation.run=true;
 			}
 			else{
