@@ -31,6 +31,7 @@ public class Teddy : MonoBehaviour {
 				animation.run=true;
 				facingRight=true;
 			}
+			else if(Input.GetButtonDown("Vertical")){
 				animation.run=true;
 			}
 			else{

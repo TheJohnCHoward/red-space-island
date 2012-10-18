@@ -1,14 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Taft.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Teddy.cs">
     <Files>
       <File FileName="Assets/Scripts/Taft.cs" Line="25" Column="36" />
-      <File FileName="Assets/Scripts/Teddy.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Animation/PlayerAnimationManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Animation/AnimatedSpriteSheet.cs" Line="90" Column="63" />
+      <File FileName="../../../Unity Projects/LegendaryBoxes/Assets/Scripts/Player/AnimatedSpriteSheet.cs" Line="21" Column="3" />
+      <File FileName="Assets/Scripts/Taft.cs" Line="23" Column="3" />
+      <File FileName="Assets/Scripts/Teddy.cs" Line="49" Column="4" />
+      <File FileName="Assets/Scripts/Animation/PlayerAnimationManager.cs" Line="15" Column="83" />
       <File FileName="Assets/Scripts/BombProjectile.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Projectile.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Attack.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Animation/AnimatedSpriteSheet.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

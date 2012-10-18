@@ -48,27 +48,6 @@ public class Taft : MonoBehaviour {
 			}
 		}
 		
-		if (punching) {
-			//print ("test");
-			print("Punch");
-			if(facingRight){
-				//animation.setAnimation("PunchRight",false);
-			}
-			else{
-				//animation.setAnimation("PunchLeft", false);
-			}
-			
-			if(!animation.quickRun){
-				if(facingRight){
-					animation.setAnimation("Right");
-				}
-				else{
-					animation.setAnimation("Left");
-				}
-				
-				punching=false;
-			}
-		}
 		
 	}
 	
