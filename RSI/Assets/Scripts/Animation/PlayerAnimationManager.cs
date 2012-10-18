@@ -12,8 +12,8 @@ public class PlayerAnimationManager : AnimatedSpriteSheet {
 		SpriteSheetInformation ssLeft= new SpriteSheetInformation(walkingLeft,3,2,10);
 		SpriteSheetInformation ssRight= new SpriteSheetInformation(walking,3,2,10);
 		
-		SpriteSheetInformation punchLeft= new SpriteSheetInformation(punchingLeft,3,1,8);
-		SpriteSheetInformation punchRight= new SpriteSheetInformation(punchingRight,3,1,8);
+		SpriteSheetInformation punchLeft= new SpriteSheetInformation(punchingLeft,3,1,10);
+		SpriteSheetInformation punchRight= new SpriteSheetInformation(punchingRight,3,1,10);
 		
 		base.spriteSheets.Add("Right", ssLeft);
 		base.spriteSheets.Add("Left",ssRight);
