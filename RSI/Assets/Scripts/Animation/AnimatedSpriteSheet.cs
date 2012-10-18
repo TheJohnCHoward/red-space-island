@@ -116,7 +116,7 @@ public class AnimatedSpriteSheet : MonoBehaviour
 	            //lastIndex = index;
 	        }
 			else{
-				print("Else: "+index);
+				//print("Else: "+index);
 				quickRun=false;
 				print("Prev animation: "+prevSpriteSheet);
 				setAnimation(prevSpriteSheet);

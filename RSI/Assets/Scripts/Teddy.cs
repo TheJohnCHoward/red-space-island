@@ -20,26 +20,26 @@ public class Teddy : MonoBehaviour {
 			Network.Destroy (this.gameObject);
 		}
 		
-		if(!punching){
-			if(Input.GetAxis("Horizontal")==-1){
-				animation.setAnimation("Left");
-				animation.run=true;
-				facingRight=false;
-			}
-			else if(Input.GetAxis("Horizontal") == 1){
-				animation.setAnimation("Right");
-				animation.run=true;
-				facingRight=true;
-			}
-			else if(Input.GetButtonDown("Vertical")){
-				animation.run=true;
-			}
-			else{
-				animation.run=false;
-			}
+		
+		if(Input.GetAxis("Horizontal")==-1){
+			animation.setAnimation("Left");
+			animation.run=true;
+			facingRight=false;
 		}
+		else if(Input.GetAxis("Horizontal") == 1){
+			animation.setAnimation("Right");
+			animation.run=true;
+			facingRight=true;
+		}
+		else if(Input.GetButtonDown("Vertical")){
+			animation.run=true;
+		}
+		else{
+			animation.run=false;
+		}
+		
 		if(Input.GetButtonDown("Light")){
-			punching=true;
+			
 			if(facingRight){
 				animation.setAnimation("PunchRight",false);
 			}
