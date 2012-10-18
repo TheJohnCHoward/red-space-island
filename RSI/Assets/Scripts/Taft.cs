@@ -38,7 +38,6 @@ public class Taft : MonoBehaviour {
 		}
 		
 		if(Input.GetButtonDown("Light")){
-			punching=true;
 			
 			if(facingRight){
 				animation.setAnimation("PunchRight",false);
