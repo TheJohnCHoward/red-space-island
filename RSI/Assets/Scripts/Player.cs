@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 	void Update () {
 		if (health <= 0) {
 			Network.Destroy (this.gameObject);
+			networkView.RPC ("LoadLevel", RPCMode.AllBuffered, Application.loadedLevel + 1);
 		}
 		
 		
@@ -81,5 +82,15 @@ public class Player : MonoBehaviour {
 				Destroy(gameObject);
 			}
 		}
+	}
+	
+	[RPC]
+	void LoadLevel(int levelPrefix) {
+		Network.SetSendingEnabled(0, false);
+		Network.isMessageQueueRunning = false;
+		Network.SetLevelPrefix(levelPrefix);
+		Application.LoadLevel(levelPrefix);
+		Network.SetSendingEnabled(0, true);
+		Network.isMessageQueueRunning = true;
 	}
 }
