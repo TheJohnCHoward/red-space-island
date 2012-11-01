@@ -1,19 +1,20 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Movement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyStuff/EnemyScript.cs">
     <Files>
-      <File FileName="Assets/Scripts/EnemyStuff/BausRegionOne.cs" Line="153" Column="9" />
-      <File FileName="Assets/Scripts/EnemyStuff/EnemyScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CameraTrigger.cs" Line="17" Column="12" />
+      <File FileName="Assets/Scripts/EnemyStuff/BausRegionOne.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/EnemyStuff/EnemyScript.cs" Line="1" Column="19" />
       <File FileName="Assets/Scripts/Powers/AttackBoost.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Attack.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Teddy.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Animation/PlayerAnimationManager.cs" Line="12" Column="25" />
+      <File FileName="Assets/Scripts/Animation/PlayerAnimationManager.cs" Line="16" Column="80" />
       <File FileName="Assets/Scripts/EnemyStuff/LazarProjectile.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/EnemyStuff/BasicEnemyAnimationManager.cs" Line="21" Column="37" />
-      <File FileName="Assets/Scripts/Animation/AnimatedSpriteSheet.cs" Line="87" Column="7" />
-      <File FileName="Assets/Scripts/LevelBase.cs" Line="16" Column="1" />
+      <File FileName="Assets/Scripts/Animation/AnimatedSpriteSheet.cs" Line="88" Column="49" />
+      <File FileName="Assets/Scripts/LevelBase.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/EnemyStuff/BombProjectile.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Player.cs" Line="75" Column="19" />
+      <File FileName="Assets/Scripts/Player.cs" Line="65" Column="1" />
       <File FileName="Assets/Scripts/CameraMovement.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Movement.cs" Line="1" Column="1" />
     </Files>
