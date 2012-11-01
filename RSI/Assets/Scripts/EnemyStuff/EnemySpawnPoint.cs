@@ -15,14 +15,14 @@ public class EnemySpawnPoint : MonoBehaviour {
 			for(int i = 0; i<enemiesSpawned.Length; i++){
 				if(spawnPoints.Length!=0){
 					if(i>spawnPoints.Length-1){
-						Network.Instantiate(enemiesSpawned[i],spawnPoints[spawnPoints.Length%i].position,spawnPoints[spawnPoints.Length%i].rotation,1);
+						Network.Instantiate(enemiesSpawned[i],spawnPoints[spawnPoints.Length%i].position,enemiesSpawned[i].transform.rotation,1);
 					}
 					else{
-						Network.Instantiate(enemiesSpawned[i],spawnPoints[i].position,spawnPoints[i].rotation,1);
+						Network.Instantiate(enemiesSpawned[i],spawnPoints[i].position,enemiesSpawned[i].transform.rotation,1);
 					}
 				}
 				else{
-					Network.Instantiate(enemiesSpawned[i],transform.position,transform.rotation,1);
+					Network.Instantiate(enemiesSpawned[i],transform.position,enemiesSpawned[i].transform.rotation,1);
 				}
 			}
 			

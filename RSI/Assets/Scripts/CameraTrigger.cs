@@ -18,6 +18,7 @@ public class CameraTrigger : MonoBehaviour {
 			
 			camPos.z+=moveCameraAmount;
 			cam.transform.position=camPos;
+			Network.Destroy(gameObject);
 		}
 	}
 }
