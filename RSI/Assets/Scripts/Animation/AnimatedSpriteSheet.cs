@@ -93,7 +93,7 @@ public class AnimatedSpriteSheet : MonoBehaviour
 			//Loops forever
 	        if(index != lastIndex-1)
 	        {
-				print("If: "+index);
+				//print("If: "+index);
 				//print("Index: "+index);
 	            Vector2 offset = new Vector2(iX*sizeOfSprite.x,
 	                                         1-(sizeOfSprite.y*iY));
@@ -118,7 +118,7 @@ public class AnimatedSpriteSheet : MonoBehaviour
 			else{
 				//print("Else: "+index);
 				quickRun=false;
-				print("Prev animation: "+prevSpriteSheet);
+				//print("Prev animation: "+prevSpriteSheet);
 				setAnimation(prevSpriteSheet);
 				//myRenderer.material.SetTextureOffset ("_MainTex", new Vector2(0,1));
 			}
@@ -130,6 +130,7 @@ public class AnimatedSpriteSheet : MonoBehaviour
 	//regular kind, loops forever
 	public void setAnimation(string animationName){
 		if(spriteSheets.ContainsKey(animationName)){
+			print("Got to animation "+animationName +", in "+gameObject.name);
 			if(currSpriteSheet!=animationName){
 				prevSpriteSheet=currSpriteSheet;
 			}
@@ -145,6 +146,10 @@ public class AnimatedSpriteSheet : MonoBehaviour
 			
 			//lastIndex = numberOfSpritesX*numberOfSpritesY;
 		}
+		else{
+			print("Was not in there");
+		}
+	
 	}
 	
 	public void setAnimation(string animationName, bool loop){

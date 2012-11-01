@@ -8,6 +8,10 @@ public class BombProjectile : Projectile {
 	private float currExplosionRadius=0.0f;
 	public float groundHeight=11.0f;
 	private float bombTimer = 1.5f;
+	public Texture normBomb, explode;
+	
+	
+	
 	
 	public override void Update ()
 	{
@@ -26,6 +30,7 @@ public class BombProjectile : Projectile {
 			}
 		}
 		else{
+			
 			Explode();
 		}
 	}
@@ -36,6 +41,7 @@ public class BombProjectile : Projectile {
 			rigidbody.isKinematic=false;
 		}
 		else{
+			renderer.material.mainTexture=explode;
 			rigidbody.isKinematic=true;
 			if(currExplosionRadius<explosionRadius){
 				currExplosionRadius+=0.5f;
@@ -67,6 +73,7 @@ public class BombProjectile : Projectile {
 	
 	public void OnTriggerEnter(Collider other){
 		if(other.tag=="Player"){
+			
 			Destroy(gameObject);
 		}
 	}

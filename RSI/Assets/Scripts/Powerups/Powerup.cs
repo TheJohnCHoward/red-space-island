@@ -5,7 +5,7 @@ public class Powerup : MonoBehaviour {
 	
 	//To be overridden, currently just destroys
 	public virtual void action(GameObject player){
-		Destroy(gameObject);
+		Network.Destroy(gameObject);
 	}
 	
 	void OnTriggerEnter(Collider other){

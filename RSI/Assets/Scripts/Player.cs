@@ -22,26 +22,26 @@ public class Player : MonoBehaviour {
 		}
 		
 		
-		if(Input.GetAxis("Horizontal")==-1){
+		if(Input.GetAxis("Horizontal")==-1 || Input.GetKeyDown(KeyCode.LeftArrow)){
 			animation.setAnimation("Left");
 			animation.run=true;
 			((BoxCollider) collider).center = new Vector3(-1, 0, 0);
 			facingRight=false;
 		}
-		else if(Input.GetAxis("Horizontal") == 1){
+		else if(Input.GetAxis("Horizontal") == 1 || Input.GetKeyDown(KeyCode.RightArrow)){
 			animation.setAnimation("Right");
 			animation.run=true;
 			facingRight=true;
 			((BoxCollider) collider).center = new Vector3(1, 0, 0);
 		}
-		else if(Input.GetButtonDown("Vertical")){
+		else if(Input.GetButtonDown("Vertical")|| Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)){
 			animation.run=true;
 		}
 		else{
 			animation.run=false;
 		}
 		
-		if(Input.GetButtonDown("Light")){
+		if(Input.GetButtonDown("Light") || Input.GetKeyDown(KeyCode.J)){
 			
 			if(facingRight){
 				animation.setAnimation("PunchRight",false);

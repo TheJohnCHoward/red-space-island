@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour {
 	private float speed = 3.0f;
 	private Vector3 destination;
 	
+	
+	
 	// Update is called once per frame
 	public virtual void Update () {
 		if(shooting){
