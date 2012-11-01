@@ -17,11 +17,21 @@ public class LevelEnd : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Player") {
 			if (!lastLevel) {
-				Application.LoadLevel(Application.loadedLevel + 1);
+				networkView.RPC ("LoadLevel", RPCMode.AllBuffered, Application.loadedLevel + 1);
 			} else {
 				// load win screen
-				print ("win");
+				networkView.RPC ("LoadLevel", RPCMode.AllBuffered, 1);
 			}
 		}
+	}
+	
+	[RPC]
+	void LoadLevel(int levelPrefix) {
+		Network.SetSendingEnabled(0, false);
+		Network.isMessageQueueRunning = false;
+		Network.SetLevelPrefix(levelPrefix);
+		Application.LoadLevel(levelPrefix);
+		Network.SetSendingEnabled(0, true);
+		Network.isMessageQueueRunning = true;
 	}
 }

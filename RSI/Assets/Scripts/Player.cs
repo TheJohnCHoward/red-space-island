@@ -18,7 +18,11 @@ public class Player : MonoBehaviour {
 	void Update () {
 		if (health <= 0) {
 			Network.Destroy (this.gameObject);
-			networkView.RPC ("LoadLevel", RPCMode.AllBuffered, Application.loadedLevel + 1);
+			if (GameObject.FindGameObjectsWithTag("Player").Length - 1 == 0) {
+				networkView.RPC ("LoadLevel", RPCMode.AllBuffered, 2);
+			} else {
+				print ("test");
+			}
 		}
 		
 		
@@ -66,9 +70,7 @@ public class Player : MonoBehaviour {
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
 			
 			health-= proj.damageAmount;
-			if(health<=0){
-				Destroy(gameObject);
-			}
+			
 		}
 	}
 	
@@ -78,9 +80,7 @@ public class Player : MonoBehaviour {
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
 			
 			health-= proj.damageAmount;
-			if(health<=0){
-				Destroy(gameObject);
-			}
+			
 		}
 	}
 	
