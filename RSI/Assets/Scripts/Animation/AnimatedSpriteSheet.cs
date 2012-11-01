@@ -46,39 +46,50 @@ public class AnimatedSpriteSheet : MonoBehaviour
     void Update()
     {
 		if(run){
-			sizeOfSprite = new Vector2 (1.0f / numberOfSpritesX ,
-                             1.0f / numberOfSpritesY);
-			
-			//Figures out what index it should be at
-	        int index = (int)(Time.timeSinceLevelLoad * fps) % (numberOfSpritesX * numberOfSpritesY);
-	 
-			
-			//Loops forever
-	        if(index != lastIndex)
-	        {
+			if(numberOfSpritesX!=1 && numberOfSpritesY!=1){
 				
+			
+				sizeOfSprite = new Vector2 (1.0f / numberOfSpritesX ,
+	                             1.0f / numberOfSpritesY);
 				
-	            Vector2 offset = new Vector2(iX*sizeOfSprite.x,
-	                                         1-(sizeOfSprite.y*iY));
-	            iX++;
-	            if(iX / numberOfSpritesX == 1)
-	            {
-	                if(numberOfSpritesY!=1){    
-						iY++;
-	                	iX=0;
-					}
+				//Figures out what index it should be at
+		        int index = (int)(Time.timeSinceLevelLoad * fps) % (numberOfSpritesX * numberOfSpritesY);
+		 
+				
+				//Loops forever
+		        if(index != lastIndex)
+		        {
 					
-	                if(iY / numberOfSpritesY == 1)
-	                {
-	                    iY=0;
-	                }
-	            }
-	 
-	            myRenderer.material.SetTextureOffset ("_MainTex", offset);
-	 
-	 
-	            lastIndex = index;
-	        }
+					
+		            Vector2 offset = new Vector2(iX*sizeOfSprite.x,
+		                                         1-(sizeOfSprite.y*iY));
+		            iX++;
+		            if(iX / numberOfSpritesX == 1)
+		            {
+		                if(numberOfSpritesY!=1){    
+							iY++;
+		                	iX=0;
+						}
+						
+		                if(iY / numberOfSpritesY == 1)
+		                {
+		                    iY=0;
+		                }
+		            }
+		 
+		            myRenderer.material.SetTextureOffset ("_MainTex", offset);
+		 
+		 
+		            lastIndex = index;
+		        }
+			}
+			else{
+				//print("There can be only one");
+					print("Got to here, should be single one");
+					myRenderer.material.SetTextureOffset("_MainTex", new Vector2(0,0));
+				
+				
+			}
 		}
 		
 		if(quickRun){
@@ -129,8 +140,9 @@ public class AnimatedSpriteSheet : MonoBehaviour
 	
 	//regular kind, loops forever
 	public void setAnimation(string animationName){
+		
 		if(spriteSheets.ContainsKey(animationName)){
-			print("Got to animation "+animationName +", in "+gameObject.name);
+			//print("Got to animation "+animationName +", in "+gameObject.name);
 			if(currSpriteSheet!=animationName){
 				prevSpriteSheet=currSpriteSheet;
 			}
@@ -147,7 +159,7 @@ public class AnimatedSpriteSheet : MonoBehaviour
 			//lastIndex = numberOfSpritesX*numberOfSpritesY;
 		}
 		else{
-			print("Was not in there");
+			//print("Was not in there");
 		}
 	
 	}

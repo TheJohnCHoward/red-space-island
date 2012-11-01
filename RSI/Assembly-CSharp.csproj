@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Animation\SpriteSheetInformation.cs" />
      <Compile Include="Assets\Scripts\Attack.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
+     <Compile Include="Assets\Scripts\CameraTrigger.cs" />
      <Compile Include="Assets\Scripts\EnemyStuff\BasicEnemy.cs" />
      <Compile Include="Assets\Scripts\EnemyStuff\BasicEnemyAnimationManager.cs" />
      <Compile Include="Assets\Scripts\EnemyStuff\BausRegionOne.cs" />
@@ -58,6 +59,7 @@
      <Compile Include="Assets\Scripts\EnemyStuff\LazarProjectile.cs" />
      <Compile Include="Assets\Scripts\EnemyStuff\Projectile.cs" />
      <Compile Include="Assets\Scripts\LevelBase.cs" />
+     <Compile Include="Assets\Scripts\LevelEnd.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\NetworkHandler.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />

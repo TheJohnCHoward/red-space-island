@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 	public GUIStyle style2;
 	public PlayerAnimationManager animation;
 	private bool facingRight, punching;
+	public float punchTimer=0.0f;
 	
 	// Use this for initialization
 	void Start () {
@@ -42,17 +43,31 @@ public class Player : MonoBehaviour {
 			animation.run=true;
 		}
 		else{
+			//if(punchTimer<0.0f){
+			if(facingRight){
+				animation.setAnimation("Right");
+			}
+			else{
+				animation.setAnimation("Left");
+			}
+			//}
+			//else{
+			//	punchTimer-=Time.deltaTime;
+			//}
+			
 			animation.run=false;
 		}
 		
 		if(Input.GetButtonDown("Light") || Input.GetKeyDown(KeyCode.J)){
 			
 			if(facingRight){
-				animation.setAnimation("PunchRight",false);
+				animation.setAnimation("PunchRight");
 			}
 			else{
-				animation.setAnimation("PunchLeft",false);
+				animation.setAnimation("PunchLeft");
 			}
+			animation.run=true;
+			punchTimer=0.1f;
 		}
 		
 	}
@@ -72,6 +87,10 @@ public class Player : MonoBehaviour {
 			health-= proj.damageAmount;
 			
 		}
+		
+		if(other.gameObject.transform.tag=="Wall"){
+			print("Collided the wall");
+		}
 	}
 	
 	void OnTriggerEnter(Collider other){
@@ -81,6 +100,9 @@ public class Player : MonoBehaviour {
 			
 			health-= proj.damageAmount;
 			
+		}
+		if(other.transform.tag=="Wall"){
+			print("Hit the wall");
 		}
 	}
 	

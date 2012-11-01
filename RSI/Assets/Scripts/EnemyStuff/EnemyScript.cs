@@ -22,6 +22,8 @@ public class EnemyScript : BasicEnemy {
 	public float stillTimer=0.0f;
 	public float checkTimer=0.0f;
 	
+	public GameObject healthPowerup, speedPowerup, powerPowerup;
+	
 	void Start(){
 		coolDownTimer=coolDownTime;
 	}
@@ -202,6 +204,18 @@ public class EnemyScript : BasicEnemy {
 		//print ("test2");
 		health -= amount;
 		if (health <= 0) {
+			float val = Random.Range(0.0f,1.0f);
+			
+			if(val>0.7 && val<0.8){
+				Network.Instantiate(healthPowerup,transform.position,healthPowerup.transform.rotation,1);
+			}
+			else if(val>0.8 && val<0.9){
+				Network.Instantiate(speedPowerup,transform.position,speedPowerup.transform.rotation,1);
+			}
+			else if(val>0.9){
+				Network.Instantiate(powerPowerup,transform.position,powerPowerup.transform.rotation,1);
+			}
+			
 			Network.Destroy (gameObject);
 		}
 	}
