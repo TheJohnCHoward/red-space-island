@@ -24,6 +24,9 @@ public class EnemyScript : BasicEnemy {
 	
 	public GameObject healthPowerup, speedPowerup, powerPowerup;
 	
+	
+	public AudioClip strike, hurt;
+	
 	void Start(){
 		coolDownTimer=coolDownTime;
 	}
@@ -179,7 +182,7 @@ public class EnemyScript : BasicEnemy {
 		//Seperating them as later we might want to specify a start position based on which side it is
 		//player on right
 		movementState=MovementState.Firing;
-		
+		audio.PlayOneShot(strike);
 		if(transform.position.x<player.transform.position.x){
 		
 			Vector3 spawnPos = transform.position;
@@ -202,6 +205,7 @@ public class EnemyScript : BasicEnemy {
 	
 	public void applyDamage(int amount) {
 		//print ("test2");
+		AudioSource.PlayClipAtPoint(hurt,transform.position);
 		health -= amount;
 		if (health <= 0) {
 			float val = Random.Range(0.0f,1.0f);

@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\CameraTrigger.cs" />
      <Compile Include="Assets\Scripts\EnemyStuff\BasicEnemy.cs" />
      <Compile Include="Assets\Scripts\EnemyStuff\BasicEnemyAnimationManager.cs" />
+     <Compile Include="Assets\Scripts\EnemyStuff\BausAnimationManager.cs" />
      <Compile Include="Assets\Scripts\EnemyStuff\BausRegionOne.cs" />
      <Compile Include="Assets\Scripts\EnemyStuff\BombProjectile.cs" />
      <Compile Include="Assets\Scripts\EnemyStuff\EnemyScript.cs" />

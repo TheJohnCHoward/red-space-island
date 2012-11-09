@@ -29,11 +29,28 @@ public class BausRegionOne : BasicEnemy {
 	public float rangeOfLazar = 10.0f;
 	//How long lazar lasts
 	public float speedOfLazar=3.0f;
-	
-	
+	public BausAnimationManager animation;
+	Vector3 prevPos;
+	bool facingLeft=false;
 	
 	// Update is called once per frame
 	void Update () {
+		
+		if(transform.position.x>prevPos.x){
+			//Going right
+			facingLeft=false;
+			animation.setAnimation("Right");
+			animation.run=true;
+		}
+		else if(transform.position.x<prevPos.x){
+			facingLeft=true;
+			animation.setAnimation("Left");
+			animation.run=true;
+		}
+		else{
+			animation.run=false;
+		}
+		
 		
 		if(stateCounter>0){
 			switch(state){
@@ -60,18 +77,18 @@ public class BausRegionOne : BasicEnemy {
 			//print("MidState: "+midState);
 			if(midState>0.3 && midState<1.0f){
 				//state=MELEE;
-				state=2;//LAZAR;
+				state=MELEE;
 			}
 			else if(midState>1.0f && midState<2.0f){
 				
 				//GONNA HAVE TO BE BULLRUSH
-				state=2;//BULLRUSH;
+				state=BULLRUSH;//BULLRUSH;
 			}
 			else if(midState>2.0f && midState<3.0f){
-				state=2;//LAZAR;
+				state=LAZAR;//LAZAR;
 			}
 			else{
-				state=2;//0;
+				state=0;
 			}
 			
 			if(state==0){
@@ -81,6 +98,8 @@ public class BausRegionOne : BasicEnemy {
 			print("State was: "+state);
 		}
 		
+		
+		prevPos=transform.position;
 	}
 	
 	/** 
@@ -145,7 +164,10 @@ public class BausRegionOne : BasicEnemy {
 	void Rushing(){
 		rushing=true;
 		if(goalLocation==Vector3.zero){
-			goalLocation=FindClosestPlayer(rangeOfSight).transform.position;
+			GameObject player = FindClosestPlayer(rangeOfSight);
+			if(player!=null){
+				goalLocation= player.transform.position;
+			}
 		}
 		else{
 			//print("RUSHING");
@@ -165,8 +187,9 @@ public class BausRegionOne : BasicEnemy {
 	}
 	
 	void Punch(){
+		//Goal is on the right
 		if(transform.position.x<goalLocation.x){
-		
+			animation.setAnimation("StrikeRight");
 			Vector3 spawnPos = transform.position;
 			spawnPos.z=transform.position.z;
 			spawnPos.x+=0.5f;
@@ -175,6 +198,7 @@ public class BausRegionOne : BasicEnemy {
 			proj.shoot(false,speedOfPunch,rangeOfPunch);
 		}
 		else{
+			animation.setAnimation("StrikeLeft");
 			Vector3 spawnPos = transform.position;
 			spawnPos.z=transform.position.z;
 			spawnPos.x-=0.5f;
