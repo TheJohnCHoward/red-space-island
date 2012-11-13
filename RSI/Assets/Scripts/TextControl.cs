@@ -4,6 +4,7 @@ using System.Collections;
 public class TextControl : MonoBehaviour {
 	
 	public GameObject core;
+	public GameObject background, quit;
 	public bool isQuit;
 	
 	void OnMouseEnter() {
@@ -21,7 +22,12 @@ public class TextControl : MonoBehaviour {
 		if (isQuit) {
 			Application.Quit();
 		} else {
-			core.AddComponent("NetworkHandler");
+			((NetworkHandler) core.GetComponent("NetworkHandler")).showNetworkInterface = true;
+			background.renderer.enabled = false;
+			renderer.enabled = false;
+			collider.enabled = false;
+			quit.renderer.enabled = false;
+			quit.collider.enabled = false;
 		}
 	}
 	
