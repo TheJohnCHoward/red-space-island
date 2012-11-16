@@ -39,6 +39,7 @@ public class TextControl : MonoBehaviour {
 			time = Time.time;
 			storyWait = true;
 		} else if (isCredits) {
+			background.enabled = false;
 			creditsScreen.guiTexture.enabled = true;
 			credits.enabled = false;
 			start.enabled = false;
@@ -46,6 +47,7 @@ public class TextControl : MonoBehaviour {
 			back.enabled = true;
 		} else if (isBack) {
 			creditsScreen.guiTexture.enabled = false;
+			background.enabled = true;
 			back.enabled = false;
 			credits.enabled = true;
 			start.enabled = true;
