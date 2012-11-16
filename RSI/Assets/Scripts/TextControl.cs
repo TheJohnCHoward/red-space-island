@@ -10,12 +10,12 @@ public class TextControl : MonoBehaviour {
 	
 	void OnMouseEnter() {
 		//change the color of the text
-		guiText.fontStyle = FontStyle.Bold;
+		//guiText.fontStyle = FontStyle.Bold;
 	}
 	
 	void OnMouseExit() {
 		//change the color of the text
-		guiText.fontStyle = FontStyle.Normal;
+		//guiText.fontStyle = FontStyle.Normal;
 	}
 	
 	void OnMouseUp() {
@@ -25,9 +25,9 @@ public class TextControl : MonoBehaviour {
 		} else {
 			((NetworkHandler) core.GetComponent("NetworkHandler")).showNetworkInterface = true;
 			background.texture = null;
-			guiText.text = "";
-			guiText.collider.enabled = false;
-			quit.renderer.enabled = false;
+			//guiText.text = "";
+			//guiText.collider.enabled = false;
+			//quit.renderer.enabled = false;
 			//quit.collider.enabled = false;
 		}
 	}

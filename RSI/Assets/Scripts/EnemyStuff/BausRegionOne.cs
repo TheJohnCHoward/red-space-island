@@ -257,6 +257,20 @@ public class BausRegionOne : BasicEnemy {
 		//print ("test2");
 		health -= amount;
 		if (health <= 0) {
+			//Unpause players
+			
+			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+			
+			foreach(GameObject player in players){
+				if(player!=null){
+					Movement mvmt = player.GetComponent("Movement") as Movement;
+					
+					if(mvmt!=null){
+						mvmt.fixedCamera=false;
+					}
+				}
+			}
+			
 			Network.Destroy (gameObject);
 		}
 	}

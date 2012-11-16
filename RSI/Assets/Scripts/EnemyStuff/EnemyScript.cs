@@ -162,15 +162,11 @@ public class EnemyScript : BasicEnemy {
 	
 	//Returns a player if one is in range, null otherwise
 	private bool isPlayerInRange(GameObject guy, float xMaxDiff, float zMaxDiff){
-		
-		float zDiff = Mathf.Abs(transform.position.z-guy.transform.position.z);
-		
-		if(zDiff<zMaxDiff){
-			float xDiff = Mathf.Abs(transform.position.x-guy.transform.position.x);
-			if(xDiff<xMaxDiff){
-				return true;
-			}
+		float xDiff = Mathf.Abs(transform.position.x-guy.transform.position.x);
+		if(xDiff<xMaxDiff){
+			return true;
 		}
+		
 		
 		return false;
 	}

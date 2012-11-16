@@ -7,7 +7,7 @@ public class EnemySpawnPoint : MonoBehaviour {
 	//the positions to spawn the enemies, if number of positions is less than number of enemies, 
 	//script will take turns assigning each one. If empty, script uses own transform
 	public Transform[] spawnPoints;
-	
+	public bool pausePlayer;
 	
 	void OnTriggerEnter(Collider other){
 		if(other.tag=="Player"){
@@ -26,6 +26,13 @@ public class EnemySpawnPoint : MonoBehaviour {
 				}
 			}
 			
+			
+			if(pausePlayer){
+				Movement mvmt = other.GetComponent("Movement") as Movement;
+				if(mvmt!=null){
+					mvmt.fixedCamera=true;
+				}
+			}
 			
 			//Last but not least, destroy this thing
 			Network.Destroy(this.gameObject);
