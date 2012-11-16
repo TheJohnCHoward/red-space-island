@@ -10,10 +10,6 @@ public class StarWarsText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 pos = transform.position;
-		pos.y+=Time.deltaTime*3;
-		pos.z+= Time.deltaTime*3;
-		
-		transform.position=pos;
+		transform.Translate (new Vector3(0, 0, -Time.deltaTime*3));
 	}
 }

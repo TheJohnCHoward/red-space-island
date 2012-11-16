@@ -7,7 +7,8 @@ public class NetworkHandler : MonoBehaviour
 
 	private string gameName = "Game name";
 	private int players = 0;
-	public GameObject background, play, quit;
+	public GUITexture background;
+	public GUIText start, story, credits;
 	public bool showNetworkInterface;
 	
 	void Awake() {
@@ -90,11 +91,10 @@ public class NetworkHandler : MonoBehaviour
 			}
 			if (GUILayout.Button ("Main Menu")) {
 				showNetworkInterface = false;
-				background.renderer.enabled = true;
-				play.renderer.enabled = true;
-				play.collider.enabled = true;
-				quit.renderer.enabled = true;
-				quit.collider.enabled = true;
+				background.enabled = true;
+				start.enabled = true;
+				story.enabled = true;
+				credits.enabled = true;;
 			}
 		}
 	}
