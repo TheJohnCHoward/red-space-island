@@ -4,17 +4,18 @@ using System.Collections;
 public class TextControl : MonoBehaviour {
 	
 	public GameObject core;
-	public GameObject background, quit;
+	public GUITexture background;
+	public GUIText quit, credits;
 	public bool isQuit;
 	
 	void OnMouseEnter() {
 		//change the color of the text
-		renderer.material.color = Color.red;
+		guiText.fontStyle = FontStyle.Bold;
 	}
 	
 	void OnMouseExit() {
 		//change the color of the text
-		renderer.material.color = Color.white;
+		guiText.fontStyle = FontStyle.Normal;
 	}
 	
 	void OnMouseUp() {
@@ -23,11 +24,11 @@ public class TextControl : MonoBehaviour {
 			Application.Quit();
 		} else {
 			((NetworkHandler) core.GetComponent("NetworkHandler")).showNetworkInterface = true;
-			background.renderer.enabled = false;
-			renderer.enabled = false;
-			collider.enabled = false;
+			background.texture = null;
+			guiText.text = "";
+			guiText.collider.enabled = false;
 			quit.renderer.enabled = false;
-			quit.collider.enabled = false;
+			//quit.collider.enabled = false;
 		}
 	}
 	
