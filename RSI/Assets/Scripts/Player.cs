@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 			if (GameObject.FindGameObjectsWithTag("Player").Length - 1 == 0) {
 				networkView.RPC ("LoadLevel", RPCMode.AllBuffered, 2);
 			} else {
-				print ("test");
+				//print ("test");
 			}
 		}
 		
@@ -37,14 +37,18 @@ public class Player : MonoBehaviour {
 		}
 		
 		if(Input.GetAxis("Horizontal")==-1 || Input.GetKeyDown(KeyCode.LeftArrow)){
-			animation.setAnimation("Left");
-			animation.run=true;
+			if(animation.looping ||(!animation.looping && animation.stopped)){
+				animation.setAnimation("Left");
+				animation.run=true;
+			}
 			((BoxCollider) collider).center = new Vector3(-1, 0, 0);
 			facingRight=false;
 		}
 		else if(Input.GetAxis("Horizontal") == 1 || Input.GetKeyDown(KeyCode.RightArrow)){
-			animation.setAnimation("Right");
-			animation.run=true;
+			if(animation.looping ||(!animation.looping && animation.stopped)){
+				animation.setAnimation("Right");
+				animation.run=true;
+			}
 			facingRight=true;
 			((BoxCollider) collider).center = new Vector3(1, 0, 0);
 		}
@@ -53,27 +57,29 @@ public class Player : MonoBehaviour {
 		}
 		else{
 			//if(punchTimer<0.0f){
-			if(facingRight){
-				animation.setAnimation("Right");
+			if(animation.looping){
+				if(facingRight){
+					animation.setAnimation("Right");
+				}
+				else{
+					animation.setAnimation("Left");
+				}
+			
+			
+				animation.run=false;
 			}
 			else{
-				animation.setAnimation("Left");
+				animation.run=true;
 			}
-			//}
-			//else{
-			//	punchTimer-=Time.deltaTime;
-			//}
-			
-			animation.run=false;
 		}
 		
 		if(Input.GetButtonDown("Light") || Input.GetKeyDown(KeyCode.J)){
 			
 			if(facingRight){
-				//animation.setAnimation("PunchRight");
+				animation.setAnimation("PunchRight", false);
 			}
 			else{
-				//animation.setAnimation("PunchLeft");
+				animation.setAnimation("PunchLeft", false);
 			}
 			animation.run=true;
 			punchTimer=0.1f;

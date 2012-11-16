@@ -7,19 +7,22 @@ public class PlayerAnimationManager : AnimatedSpriteSheet {
 	
 	// Use this for initialization
 	void Start () {
+		//print("Instanitated it all");
 		base.myRenderer = renderer;
 		base.spriteSheets = new Dictionary<string, SpriteSheetInformation>();
 		SpriteSheetInformation ssLeft= new SpriteSheetInformation(walkingLeft,3,2,10);
 		SpriteSheetInformation ssRight= new SpriteSheetInformation(walking,3,2,10);
 		
-		SpriteSheetInformation punchLeft= new SpriteSheetInformation(punchingLeft,1,1,10);
-		SpriteSheetInformation punchRight= new SpriteSheetInformation(punchingRight,1,1,10);
+		SpriteSheetInformation punchLeft= new SpriteSheetInformation(punchingLeft,3,1,10);
+		SpriteSheetInformation punchRight= new SpriteSheetInformation(punchingRight,3,1,10);
 		
 		base.spriteSheets.Add("Right", ssLeft);
 		base.spriteSheets.Add("Left",ssRight);
 		
 		base.spriteSheets.Add("PunchRight", punchLeft);
 		base.spriteSheets.Add("PunchLeft",punchRight);
+		
+		
 		
 		base.setAnimation("Right");
 	}

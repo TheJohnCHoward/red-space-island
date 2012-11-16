@@ -44,10 +44,11 @@ public class AnimatedSpriteSheet : MonoBehaviour
  
     void Update()
     {
-		if(!stopped){
+		if(!stopped && run){
 			
-        int index = (int)((timer-timeStart) * fps) % (numberOfSpritesX * numberOfSpritesY);
- 	
+        int index = 0;
+		index=index=(int)((Time.time-timeStart) * fps) % (numberOfSpritesX * numberOfSpritesY);
+			
 			
 			if(index!=prevIndex){
 			    Vector2 offset = new Vector2(iX*sizeOfSprite.x,
@@ -108,16 +109,9 @@ public class AnimatedSpriteSheet : MonoBehaviour
 			fps=info.fps;
 			sizeOfSprite=info.sizeOfSprite;
 			myRenderer.material.SetTextureScale ("_MainTex", sizeOfSprite);
+			looping=true;
 			
 			stopped=false;
-			timeStart=Time.time;
-			timer=Time.time;
-			iX=0;
-			iY=1;
-			looping=true;
-			prevIndex = -1;
-			
-			
 		}
 		else{
 			//print("Was not in there");
@@ -144,6 +138,7 @@ public class AnimatedSpriteSheet : MonoBehaviour
 			fps=info.fps;
 			sizeOfSprite=info.sizeOfSprite;
 			myRenderer.material.SetTextureScale ("_MainTex", sizeOfSprite);
+			
 			stopped=false;
 			timeStart=Time.time;
 			timer=Time.time;
@@ -151,7 +146,8 @@ public class AnimatedSpriteSheet : MonoBehaviour
 			iY=1;
 			this.looping=_looping;
 			prevIndex = -1;
-			
+			timeStart=Time.time;
+			timer=Time.time;
 			
 		}
 		else{
