@@ -212,13 +212,13 @@ public class EnemyScript : BasicEnemy {
 		if (health <= 0) {
 			float val = Random.Range(0.0f,1.0f);
 			
-			if(val>0.7 && val<0.8){
+			if(val>0.7 && val<0.9){
 				Network.Instantiate(healthPowerup,transform.position,healthPowerup.transform.rotation,1);
 			}
-			else if(val>0.8 && val<0.9){
+			else if(val>0.9 && val<0.95){
 				Network.Instantiate(speedPowerup,transform.position,speedPowerup.transform.rotation,1);
 			}
-			else if(val>0.9){
+			else if(val>0.95){
 				Network.Instantiate(powerPowerup,transform.position,powerPowerup.transform.rotation,1);
 			}
 			

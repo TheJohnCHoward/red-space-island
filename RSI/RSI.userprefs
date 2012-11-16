@@ -1,7 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LevelBase.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyStuff/EnemyScript.cs">
     <Files>
+      <File FileName="../../../Unity Projects/LivingRoom Play/Assets/Scripts/OSC/OscReceiver.cs" Line="1" Column="1" />
+      <File FileName="../../../Unity Projects/LivingRoom Play/Assets/Scripts/OSC/UDPPacketIO.cs" Line="1" Column="1" />
+      <File FileName="../../../Unity Projects/LivingRoom Play/Assets/Scripts/OSC/Osc.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NetworkHandler.cs" Line="36" Column="74" />
       <File FileName="Assets/Scripts/LevelBase.cs" Line="16" Column="1" />
       <File FileName="Assets/Scripts/EnemyStuff/ChaserScript.cs" Line="151" Column="28" />
       <File FileName="Assets/Scripts/StarWarsText.cs" Line="14" Column="26" />
@@ -9,8 +13,12 @@
       <File FileName="Assets/Scripts/Animation/PlayerAnimationManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Powerups/SpeedBoostPowerup.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Powerups/Powerup.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/NetworkHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyStuff/EnemyScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/EnemyStuff/EnemyScript.cs" Line="218" Column="19" />
+      <File FileName="Assets/Scripts/TextControl.cs" Line="18" Column="5" />
+      <File FileName="Assets/Scripts/CameraTrigger.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CameraMovement.cs" Line="24" Column="5" />
+      <File FileName="Assets/Scripts/EnemyStuff/EnemySpawnPoint.cs" Line="1" Column="19" />
+      <File FileName="Assets/Scripts/EnemyStuff/BausRegionOne.cs" Line="1" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
