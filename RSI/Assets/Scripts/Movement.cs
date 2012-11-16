@@ -5,6 +5,8 @@ public class Movement : MonoBehaviour {
 	// player speed
 	public float speed = 4;
 	public float bounds = 6;
+	public float zMax = 13;
+	public float zMin = 0;
 	public bool fixedCamera;
 	public Transform mainCamera;
 	
@@ -24,9 +26,9 @@ public class Movement : MonoBehaviour {
 		if (fixedCamera && transform.position.x - mainCamera.position.x >= bounds - .1 && xTranslation > 0) {
 			xTranslation = 0;
 		}
-		if (transform.position.z >= 13 && zTranslation > 0) {
+		if (transform.position.z >= zMax && zTranslation > 0) {
 			zTranslation = 0;
-		} else if (transform.position.z <= 0 && zTranslation < 0) {
+		} else if (transform.position.z <= zMin && zTranslation < 0) {
 			zTranslation = 0;
 		}
 		transform.position += new Vector3(xTranslation, 0, zTranslation);

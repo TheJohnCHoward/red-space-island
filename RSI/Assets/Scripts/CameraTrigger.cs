@@ -2,23 +2,27 @@ using UnityEngine;
 using System.Collections;
 
 public class CameraTrigger : MonoBehaviour {
-	GameObject cam;
-	public int moveCameraAmount;
+	CameraMovement cam;
 	
 	// Use this for initialization
 	void Start () {
-		cam = GameObject.Find("Main Camera");
-		
+		GameObject camera = GameObject.Find("Main Camera");
+		cam = camera.GetComponent("CameraMovement") as CameraMovement;
 	}
 
 	
 	void OnTriggerEnter(Collider other){
 		if(other.tag=="Player"){
-			Vector3 camPos = cam.transform.position;
+			Movement mvmt = other.GetComponent("Movement") as Movement;
 			
-			camPos.z+=moveCameraAmount;
-			cam.transform.position=camPos;
-			Network.Destroy(gameObject);
+			if(mvmt!=null){
+				float zBoundDifference = other.transform.position.z-mvmt.zMax;
+				mvmt.zMax=other.transform.position.z;
+				mvmt.zMin+= zBoundDifference;
+				print("Z bounds diff: "+zBoundDifference);
+				
+				cam.newZVal+=zBoundDifference;
+			}
 		}
 	}
 }

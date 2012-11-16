@@ -9,10 +9,10 @@ public class Player : MonoBehaviour {
 	public PlayerAnimationManager animation;
 	private bool facingRight, punching;
 	public float punchTimer=0.0f;
-	
+	public float redTimer=0.0f;
 	// Use this for initialization
 	void Start () {
-	
+		redTimer=-20;
 	}
 	
 	// Update is called once per frame
@@ -26,6 +26,15 @@ public class Player : MonoBehaviour {
 			}
 		}
 		
+		
+		if(redTimer>0){
+			redTimer-=Time.deltaTime;
+		}
+		else if(redTimer!=-20){
+			MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
+			mesh.material.color= new Color(1.0f,1.0f,1.0f,1.0f);
+			redTimer=-20;
+		}
 		
 		if(Input.GetAxis("Horizontal")==-1 || Input.GetKeyDown(KeyCode.LeftArrow)){
 			animation.setAnimation("Left");
@@ -61,10 +70,10 @@ public class Player : MonoBehaviour {
 		if(Input.GetButtonDown("Light") || Input.GetKeyDown(KeyCode.J)){
 			
 			if(facingRight){
-				animation.setAnimation("PunchRight");
+				//animation.setAnimation("PunchRight");
 			}
 			else{
-				animation.setAnimation("PunchLeft");
+				//animation.setAnimation("PunchLeft");
 			}
 			animation.run=true;
 			punchTimer=0.1f;
@@ -85,7 +94,9 @@ public class Player : MonoBehaviour {
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
 			
 			health-= proj.damageAmount;
-			
+			MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
+			mesh.material.color= new Color(0.8f,0.1f,0.1f,1.0f);
+			redTimer=0.1f;
 		}
 		
 		if(other.gameObject.transform.tag=="Wall"){
@@ -99,7 +110,9 @@ public class Player : MonoBehaviour {
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
 			
 			health-= proj.damageAmount;
-			
+			MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
+			mesh.material.color= new Color(0.8f,0.1f,0.1f,1.0f);
+			redTimer=0.1f;
 		}
 		if(other.transform.tag=="Wall"){
 			print("Hit the wall");

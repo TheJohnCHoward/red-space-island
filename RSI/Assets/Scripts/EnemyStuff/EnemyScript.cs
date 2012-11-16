@@ -191,6 +191,12 @@ public class EnemyScript : BasicEnemy {
 			
 			
 			Projectile proj = Instantiate(projectile,spawnPos,projectile.transform.rotation) as Projectile;
+			
+			BombProjectile bomb = proj.GetComponent("BombProjectile") as BombProjectile;
+			
+			if(bomb!=null){
+				bomb.groundHeight=transform.position.y-transform.localScale.y/2;
+			}
 			proj.shoot(false,speedOfProjectile,rangeOfWeapon+2);
 		}
 		else{
