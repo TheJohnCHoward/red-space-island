@@ -16,13 +16,15 @@ public class BausAnimationManager : AnimatedSpriteSheet {
 		SpriteSheetInformation punchLeft= new SpriteSheetInformation("Marx/RoboKarlMarxStrikeLeft",1,1,10);
 		SpriteSheetInformation punchRight= new SpriteSheetInformation("Marx/RoboKarlMarxStrikeRight",1,1,10);
 		
-		
+		SpriteSheetInformation lazer= new SpriteSheetInformation("Marx/RoboKarlMarxLazar",1,1,10);
 		
 		base.spriteSheets.Add("Right", ssRight);
 		base.spriteSheets.Add("Left",ssLeft);
 		
-		base.spriteSheets.Add("StrikeRight", punchLeft);
-		base.spriteSheets.Add("StrikeLeft",punchRight);
+		base.spriteSheets.Add("StrikeRight", punchRight);
+		base.spriteSheets.Add("StrikeLeft",punchLeft);
+		
+		base.spriteSheets.Add("Lazer", lazer);
 		
 		base.setAnimation("Left");
 	}

@@ -74,6 +74,7 @@
      <Compile Include="Assets\Scripts\Powerups\Powerup.cs" />
      <Compile Include="Assets\Scripts\Powerups\SpeedBoostPowerup.cs" />
      <Compile Include="Assets\Scripts\PrototypeLevel.cs" />
+     <Compile Include="Assets\Scripts\Return.cs" />
      <Compile Include="Assets\Scripts\StarWarsText.cs" />
      <Compile Include="Assets\Scripts\Taft.cs" />
      <Compile Include="Assets\Scripts\Teddy.cs" />

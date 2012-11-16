@@ -10,6 +10,9 @@ public class Player : MonoBehaviour {
 	private bool facingRight, punching;
 	public float punchTimer=0.0f;
 	public float redTimer=0.0f;
+	
+	public AudioClip hurt;
+	
 	// Use this for initialization
 	void Start () {
 		redTimer=-20;
@@ -91,31 +94,27 @@ public class Player : MonoBehaviour {
 		
 		if(other.transform.tag=="Projectile"){
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
-			
+			audio.PlayOneShot(hurt);
 			health-= proj.damageAmount;
 			MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
 			mesh.material.color= new Color(0.8f,0.1f,0.1f,1.0f);
 			redTimer=0.1f;
 		}
 		
-		if(other.gameObject.transform.tag=="Wall"){
-			print("Collided the wall");
-		}
+		
 	}
 	
 	void OnTriggerEnter(Collider other){
 		
 		if(other.transform.tag=="Projectile"){
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
-			
+			audio.PlayOneShot(hurt);
 			health-= proj.damageAmount;
 			MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
 			mesh.material.color= new Color(0.8f,0.1f,0.1f,1.0f);
 			redTimer=0.1f;
 		}
-		if(other.transform.tag=="Wall"){
-			print("Hit the wall");
-		}
+		
 	}
 	
 	[RPC]

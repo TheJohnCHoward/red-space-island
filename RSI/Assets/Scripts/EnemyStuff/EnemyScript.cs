@@ -22,6 +22,9 @@ public class EnemyScript : BasicEnemy {
 	public float stillTimer=0.0f;
 	public float checkTimer=0.0f;
 	
+	//redness
+	float redTimer=-20;
+	
 	public GameObject healthPowerup, speedPowerup, powerPowerup;
 	
 	
@@ -33,7 +36,14 @@ public class EnemyScript : BasicEnemy {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(redTimer>0){
+			redTimer-=Time.deltaTime;
+		}
+		else if(redTimer!=-20){
+			MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
+			mesh.material.color= new Color(1.0f,1.0f,1.0f,1.0f);
+			redTimer=-20;
+		}
 		
 		//Animation stuff
 		if(transform.position.x>prevPos.x &&movementState==MovementState.Walking){
@@ -207,8 +217,12 @@ public class EnemyScript : BasicEnemy {
 	
 	public void applyDamage(int amount) {
 		//print ("test2");
-		AudioSource.PlayClipAtPoint(hurt,transform.position);
+		audio.PlayOneShot(hurt);
 		health -= amount;
+		MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
+		mesh.material.color= new Color(0.8f,0.1f,0.1f,1.0f);
+		redTimer=0.1f;
+		
 		if (health <= 0) {
 			float val = Random.Range(0.0f,1.0f);
 			

@@ -110,7 +110,9 @@ public class AnimatedSpriteSheet : MonoBehaviour
 			sizeOfSprite=info.sizeOfSprite;
 			myRenderer.material.SetTextureScale ("_MainTex", sizeOfSprite);
 			looping=true;
-			
+			if(numberOfSpritesX==1 && numberOfSpritesY==1){
+				prevIndex=-1;
+			}
 			stopped=false;
 		}
 		else{

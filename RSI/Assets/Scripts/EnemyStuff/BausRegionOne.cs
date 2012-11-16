@@ -32,9 +32,21 @@ public class BausRegionOne : BasicEnemy {
 	public BausAnimationManager animation;
 	Vector3 prevPos;
 	bool facingLeft=false;
+	public AudioClip hurt, strike;
+	public float redTimer=-20;
 	
 	// Update is called once per frame
 	void Update () {
+		if(redTimer>0){
+			redTimer-=Time.deltaTime;
+		}
+		else if(redTimer!=-20){
+			MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
+			mesh.material.color= new Color(1.0f,1.0f,1.0f,1.0f);
+			redTimer=-20;
+		}
+		
+		
 		
 		if(transform.position.x>prevPos.x){
 			//Going right
@@ -162,6 +174,7 @@ public class BausRegionOne : BasicEnemy {
 	
 	
 	void Rushing(){
+		audio.PlayOneShot(strike);
 		rushing=true;
 		if(goalLocation==Vector3.zero){
 			GameObject player = FindClosestPlayer(rangeOfSight);
@@ -196,6 +209,7 @@ public class BausRegionOne : BasicEnemy {
 					
 			Projectile proj = Network.Instantiate(punchProjectile,spawnPos,transform.rotation,1) as Projectile;
 			proj.shoot(false,speedOfPunch,rangeOfPunch);
+			audio.PlayOneShot(strike);
 		}
 		else{
 			animation.setAnimation("StrikeLeft");
@@ -205,6 +219,7 @@ public class BausRegionOne : BasicEnemy {
 					
 			Projectile proj = Network.Instantiate(punchProjectile,spawnPos,transform.rotation,1) as Projectile;
 			proj.shoot(true,speedOfPunch,rangeOfPunch);
+			audio.PlayOneShot(strike);
 		}
 	}
 	
@@ -213,7 +228,7 @@ public class BausRegionOne : BasicEnemy {
 	
 	//Lazar will go in both directions
 	void LazarShoot(){
-				
+		animation.setAnimation("Lazer");
 		//Instantiate both parts
 		//One on left
 		
@@ -228,7 +243,7 @@ public class BausRegionOne : BasicEnemy {
 		
 		Projectile proj2 = Network.Instantiate(lazar,rightPos,lazar.transform.rotation,1) as Projectile;
 		proj2.shoot(true,speedOfLazar,rangeOfLazar);
-		
+		audio.PlayOneShot(strike);
 		wait(speedOfLazar);
 		
 		
@@ -239,6 +254,7 @@ public class BausRegionOne : BasicEnemy {
 			if(other.tag=="Player"){
 				print("Hit playert");
 				Player playah = other.gameObject.GetComponent("Player") as Player;
+				audio.PlayOneShot(strike);
 				playah.health-=jumpDamage;
 			}
 		}
@@ -248,6 +264,7 @@ public class BausRegionOne : BasicEnemy {
 			if(other.gameObject.tag=="Player"){
 				print("Hit playerxc");
 				Player playah = other.gameObject.GetComponent("Player") as Player;
+				audio.PlayOneShot(strike);
 				playah.health-=jumpDamage;
 			}
 		}
@@ -256,6 +273,11 @@ public class BausRegionOne : BasicEnemy {
 	public void applyDamage(int amount) {
 		//print ("test2");
 		health -= amount;
+		
+		audio.PlayOneShot(hurt);
+		MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
+		mesh.material.color= new Color(0.8f,0.1f,0.1f,1.0f);
+		redTimer=0.1f;
 		if (health <= 0) {
 			//Unpause players
 			
