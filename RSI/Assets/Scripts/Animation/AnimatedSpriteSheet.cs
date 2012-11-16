@@ -11,17 +11,16 @@ public class AnimatedSpriteSheet : MonoBehaviour
 	public Dictionary<string, SpriteSheetInformation> spriteSheets;
     private Vector2 sizeOfSprite;
     public Renderer myRenderer;
-    private int lastIndex = -1;
+    private int prevIndex = -1;
 	public bool run;
 	
 	//For quick Animations
-	public bool quickRun;
-	public float timeStart;
+	public bool looping,stopped;
+	
+	public float timeStart, timer;
 	
 	private string currSpriteSheet,prevSpriteSheet;
 	
-	//For testing
-	private bool Normal;
  
     void Start ()
 	{
@@ -45,95 +44,49 @@ public class AnimatedSpriteSheet : MonoBehaviour
  
     void Update()
     {
-		if(run){
-			if(numberOfSpritesX!=1 && numberOfSpritesY!=1){
-				
+		if(!stopped){
 			
-				sizeOfSprite = new Vector2 (1.0f / numberOfSpritesX ,
-	                             1.0f / numberOfSpritesY);
-				
-				//Figures out what index it should be at
-		        int index = (int)(Time.timeSinceLevelLoad * fps) % (numberOfSpritesX * numberOfSpritesY);
-		 
-				
-				//Loops forever
-		        if(index != lastIndex)
-		        {
-					
-					
-		            Vector2 offset = new Vector2(iX*sizeOfSprite.x,
-		                                         1-(sizeOfSprite.y*iY));
-		            iX++;
-		            if(iX / numberOfSpritesX == 1)
-		            {
-		                if(numberOfSpritesY!=1){    
-							iY++;
-		                	iX=0;
-						}
+        int index = (int)((timer-timeStart) * fps) % (numberOfSpritesX * numberOfSpritesY);
+ 	
+			
+			if(index!=prevIndex){
+			    Vector2 offset = new Vector2(iX*sizeOfSprite.x,
+			                                         1-(sizeOfSprite.y*iY));
+			    iX++;
 						
-		                if(iY / numberOfSpritesY == 1)
-		                {
-		                    iY=0;
-		                }
-		            }
-		 
-		            myRenderer.material.SetTextureOffset ("_MainTex", offset);
-		 
-		 
-		            lastIndex = index;
-		        }
-			}
-			else{
-				//print("There can be only one");
-					print("Got to here, should be single one");
-					myRenderer.material.SetTextureOffset("_MainTex", new Vector2(0,0));
+			            if(iX / numberOfSpritesX == 1)
+			            {
+			                
+			                
+			                if(iY / numberOfSpritesY == 1)
+			                {
+								if(!looping){
+			                		stopped=true;
+								}
+								else{
+									iX=0;
+									iY=1;
+								}
+			                }
+							else{
+								iX=0;
+								if(numberOfSpritesY!=1){    
+									iY++;
+								}
+							}
+			            }
+			 
+			            myRenderer.material.SetTextureOffset ("_MainTex", offset);
 				
-				
+				prevIndex=index;
 			}
+			
+	 			
+	        
+			
 		}
 		
-		if(quickRun){
-			
-			sizeOfSprite = new Vector2 (1.0f / numberOfSpritesX ,
-                             1.0f / numberOfSpritesY);
-			
-			//Figures out what index it should be at
-	        int index = (int)((Time.timeSinceLevelLoad-timeStart) * fps) % (numberOfSpritesX * numberOfSpritesY);
-	 
-			//print("Index: "+index +". Lastindex: "+lastIndex);
-			//Loops forever
-	        if(index != lastIndex-1)
-	        {
-				//print("If: "+index);
-				//print("Index: "+index);
-	            Vector2 offset = new Vector2(iX*sizeOfSprite.x,
-	                                         1-(sizeOfSprite.y*iY));
-	            iX++;
-	            if(iX / numberOfSpritesX == 1)
-	            {
-	                if(numberOfSpritesY!=1){    
-						iY++;
-	                	iX=0;
-					}
-	                if(iY / numberOfSpritesY == 1)
-	                {
-	                    iY=0;
-	                }
-	            }
-	 
-	            myRenderer.material.SetTextureOffset ("_MainTex", offset);
-	 
-	 
-	            //lastIndex = index;
-	        }
-			else{
-				//print("Else: "+index);
-				quickRun=false;
-				//print("Prev animation: "+prevSpriteSheet);
-				setAnimation(prevSpriteSheet);
-				//myRenderer.material.SetTextureOffset ("_MainTex", new Vector2(0,1));
-			}
-		}
+		timer+=Time.deltaTime;
     }
 	
 	//Sets the animation to said animation Name in the dictionary of sheets, if it exists
@@ -156,7 +109,15 @@ public class AnimatedSpriteSheet : MonoBehaviour
 			sizeOfSprite=info.sizeOfSprite;
 			myRenderer.material.SetTextureScale ("_MainTex", sizeOfSprite);
 			
-			//lastIndex = numberOfSpritesX*numberOfSpritesY;
+			stopped=false;
+			timeStart=Time.time;
+			timer=Time.time;
+			iX=0;
+			iY=1;
+			looping=true;
+			prevIndex = -1;
+			
+			
 		}
 		else{
 			//print("Was not in there");
@@ -164,52 +125,38 @@ public class AnimatedSpriteSheet : MonoBehaviour
 	
 	}
 	
-	public void setAnimation(string animationName, bool loop){
-		if(loop){
-			if(spriteSheets.ContainsKey(animationName)){
-				if(currSpriteSheet!=animationName){
-					prevSpriteSheet=currSpriteSheet;
-				}
-				SpriteSheetInformation info = spriteSheets[animationName];
-				currSpriteSheet=animationName;
-				renderer.material.mainTexture= (Texture2D)Resources.Load( info.fileName, typeof(Texture2D));
-				numberOfSpritesX=info.numberOfSpritesX;
-				numberOfSpritesY=info.numberOfSpritesY;
-				
-				fps=info.fps;
-				sizeOfSprite=info.sizeOfSprite;
-				myRenderer.material.SetTextureScale ("_MainTex", sizeOfSprite);
-				
-				
-				
-				//lastIndex = numberOfSpritesX*numberOfSpritesY;
+	//Sets the animation to said animation Name in the dictionary of sheets, if it exists
+	
+	//regular kind, loops forever
+	public void setAnimation(string animationName, bool _looping){
+		
+		if(spriteSheets.ContainsKey(animationName)){
+			//print("Got to animation "+animationName +", in "+gameObject.name);
+			if(currSpriteSheet!=animationName){
+				prevSpriteSheet=currSpriteSheet;
 			}
+			SpriteSheetInformation info = spriteSheets[animationName];
+			currSpriteSheet=animationName;
+			renderer.material.mainTexture= (Texture2D)Resources.Load( info.fileName, typeof(Texture2D));
+			numberOfSpritesX=info.numberOfSpritesX;
+			numberOfSpritesY=info.numberOfSpritesY;
+			
+			fps=info.fps;
+			sizeOfSprite=info.sizeOfSprite;
+			myRenderer.material.SetTextureScale ("_MainTex", sizeOfSprite);
+			stopped=false;
+			timeStart=Time.time;
+			timer=Time.time;
+			iX=0;
+			iY=1;
+			this.looping=_looping;
+			prevIndex = -1;
+			
+			
 		}
 		else{
-			if(spriteSheets.ContainsKey(animationName)){
-				if(currSpriteSheet!=animationName){
-					prevSpriteSheet=currSpriteSheet;
-				}
-				
-				SpriteSheetInformation info = spriteSheets[animationName];
-				currSpriteSheet=animationName;
-				renderer.material.mainTexture= (Texture2D)Resources.Load( info.fileName, typeof(Texture2D));
-				numberOfSpritesX=info.numberOfSpritesX;
-				numberOfSpritesY=info.numberOfSpritesY;
-				
-				fps=info.fps;
-				sizeOfSprite=info.sizeOfSprite;
-				myRenderer.material.SetTextureScale ("_MainTex", sizeOfSprite);
-				
-				//Special stuff
-				lastIndex = (numberOfSpritesX*numberOfSpritesY);
-				timeStart=Time.timeSinceLevelLoad;
-				
-				
-				quickRun=true;
-				run=false;
-			}
+			//print("Was not in there");
 		}
-	}
 	
+	}
 }
