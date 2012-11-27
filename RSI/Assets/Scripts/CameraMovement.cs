@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CameraMovement : MonoBehaviour {
 	public float speed = 4;
-	public float bounds = 6;
+	private float bounds = 1;
 	public float newZVal;
 	// Use this for initialization
 	void Start () {
@@ -14,12 +14,17 @@ public class CameraMovement : MonoBehaviour {
 	void Update () {
 		float xTranslation = 0;
 		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		
 		foreach (GameObject player in players) {
+			
 			if (player.transform.position.x - transform.position.x > bounds) {
 				Movement mvmt = player.GetComponent("Movement") as Movement;
 				
-				if(mvmt!=null){
+				if(mvmt!=null && !mvmt.fixedCamera){
 					speed=mvmt.speed;
+				}//Added this thing in, in order to deal with fixed camera
+				else{
+					speed=0;
 				}
 				
 				

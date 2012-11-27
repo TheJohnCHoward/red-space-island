@@ -1,16 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyStuff/BausAnimationManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyStuff/BasicEnemyAnimationManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Player.cs" Line="14" Column="23" />
       <File FileName="../../../Unity Projects/LegendaryBoxes/Assets/Scripts/MainMenu/MovieScript.cs" Line="84" Column="4" />
-      <File FileName="Assets/Scripts/Animation/AnimatedSpriteSheet.cs" Line="113" Column="4" />
+      <File FileName="Assets/Scripts/EnemyStuff/BausRegionOne.cs" Line="231" Column="32" />
+      <File FileName="Assets/Scripts/Player.cs" Line="113" Column="4" />
+      <File FileName="Assets/Scripts/Animation/AnimatedSpriteSheet.cs" Line="114" Column="5" />
       <File FileName="Assets/Scripts/Animation/PlayerAnimationManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyStuff/EnemyScript.cs" Line="39" Column="3" />
-      <File FileName="Assets/Scripts/EnemyStuff/BausAnimationManager.cs" Line="25" Column="47" />
+      <File FileName="Assets/Scripts/EnemyStuff/EnemyScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/EnemyStuff/BausAnimationManager.cs" Line="27" Column="41" />
       <File FileName="Assets/Scripts/EnemyStuff/ChaserScript.cs" Line="45" Column="4" />
       <File FileName="Assets/Scripts/Teddy.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Attack.cs" Line="17" Column="1" />
+      <File FileName="Assets/Scripts/Attack.cs" Line="20" Column="21" />
+      <File FileName="Assets/Scripts/EnemyStuff/BasicEnemyAnimationManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
