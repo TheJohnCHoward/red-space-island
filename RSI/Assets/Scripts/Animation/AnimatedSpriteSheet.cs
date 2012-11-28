@@ -19,7 +19,7 @@ public class AnimatedSpriteSheet : MonoBehaviour
 	
 	public float timeStart, timer;
 	
-	private string currSpriteSheet,prevSpriteSheet;
+	public string currSpriteSheet,prevSpriteSheet;
 	
  
     void Start ()
@@ -49,37 +49,42 @@ public class AnimatedSpriteSheet : MonoBehaviour
         int index = 0;
 		index=index=(int)((Time.time-timeStart) * fps) % (numberOfSpritesX * numberOfSpritesY);
 			
-			
-			if(index!=prevIndex){
-			    Vector2 offset = new Vector2(iX*sizeOfSprite.x,
-			                                         1-(sizeOfSprite.y*iY));
-			    iX++;
-						
-			            if(iX / numberOfSpritesX == 1)
-			            {
-			                
-			                
-			                if(iY / numberOfSpritesY == 1)
-			                {
-								if(!looping){
-			                		stopped=true;
-								}
+			if(sizeOfSprite.x==1 && sizeOfSprite.y==1){
+				myRenderer.material.SetTextureOffset ("_MainTex", new Vector2(0,0));
+			}
+			else{
+				if(index!=prevIndex){
+				    Vector2 offset = new Vector2(iX*sizeOfSprite.x,
+				                                         1-(sizeOfSprite.y*iY));
+				    iX++;
+							
+				            if(iX / numberOfSpritesX == 1)
+				            {
+				                
+				                
+				                if(iY / numberOfSpritesY == 1)
+				                {
+									if(!looping){
+				                		stopped=true;
+										
+									}
+									else{
+										iX=0;
+										iY=1;
+									}
+				                }
 								else{
 									iX=0;
-									iY=1;
+									if(numberOfSpritesY!=1){    
+										iY++;
+									}
 								}
-			                }
-							else{
-								iX=0;
-								if(numberOfSpritesY!=1){    
-									iY++;
-								}
-							}
-			            }
-			 
-			            myRenderer.material.SetTextureOffset ("_MainTex", offset);
-				
-				prevIndex=index;
+				            }
+				 
+				            myRenderer.material.SetTextureOffset ("_MainTex", offset);
+					
+					prevIndex=index;
+				}
 			}
 			
 	 			
@@ -112,7 +117,12 @@ public class AnimatedSpriteSheet : MonoBehaviour
 			looping=true;
 			if(numberOfSpritesX==1 && numberOfSpritesY==1){
 				prevIndex=-1;
+				iX=0;
+				iY=0;
+				myRenderer.material.SetTextureOffset ("_MainTex", new Vector2(0,0));
 			}
+			
+			
 			stopped=false;
 		}
 		else{

@@ -9,7 +9,6 @@ public class BausRegionOne : BasicEnemy {
 	public const int BULLRUSH =2;
 	public const int LAZAR = 3;
 	
-	
 	public Vector3 goalLocation;
 	private bool rushing;
 	
@@ -47,23 +46,6 @@ public class BausRegionOne : BasicEnemy {
 		}
 		
 		
-		
-		if(transform.position.x>prevPos.x){
-			//Going right
-			facingLeft=false;
-			animation.setAnimation("Right");
-			animation.run=true;
-		}
-		else if(transform.position.x<prevPos.x){
-			facingLeft=true;
-			animation.setAnimation("Left");
-			animation.run=true;
-		}
-		else{
-			animation.run=false;
-		}
-		
-		
 		if(stateCounter>0){
 			switch(state){
 			case 0:
@@ -88,26 +70,39 @@ public class BausRegionOne : BasicEnemy {
 			
 			//print("MidState: "+midState);
 			if(midState>0.3 && midState<1.0f){
-				//state=MELEE;
 				state=MELEE;
+				
 			}
 			else if(midState>1.0f && midState<2.0f){
 				
 				//GONNA HAVE TO BE BULLRUSH
-				state=BULLRUSH;//BULLRUSH;
+				state=BULLRUSH;
 			}
 			else if(midState>2.0f && midState<3.0f){
-				state=LAZAR;//LAZAR;
+				state=LAZAR;
 			}
 			else{
 				state=0;
+				//print("EVER GETTING WAIT?");
+				
 			}
 			
 			if(state==0){
 				//print("Got to wait once again");
+				if(animation.currSpriteSheet!="Still"){
+					animation.setAnimation("Still");
+				}
 				timer=waitTime;
 			}
-			print("State was: "+state);
+			//print("State was: "+state);
+		}
+		
+		//If not moving, don't make rumble
+		if(prevPos==transform.position){
+			audio.loop=false;
+		}
+		else{
+			audio.loop=true;
 		}
 		
 		
@@ -126,7 +121,7 @@ public class BausRegionOne : BasicEnemy {
 	void Waiting(){
 		if(timer<=0.0f){
 			stateCounter=0;
-				
+			//animation.setAnimation("Still");
 		}
 		else{
 			timer-=Time.deltaTime;
@@ -136,18 +131,47 @@ public class BausRegionOne : BasicEnemy {
 	void Melee(){
 		if(goalLocation==Vector3.zero){
 			goalLocation=FindClosestPlayer(rangeOfSight).transform.position;
+			//Gotta be a bit higher than the player
+			goalLocation.y=12.4f;
 		}
 		else{
+			goalLocation=FindClosestPlayer(rangeOfSight).transform.position;
+			goalLocation.y=12.4f;
 			Vector3 differenceToGoal = goalLocation-transform.position;
-			if(differenceToGoal.magnitude<1){
+			if(differenceToGoal.magnitude<3){
 				//Punch time
 				Punch();
 				
-				goalLocation=Vector3.zero;
-				stateCounter--;
+				
 			}
 			else{
-				transform.position=Vector3.Lerp(transform.position,goalLocation,Time.deltaTime*speed);
+				//TRYING A DIFFERENT MOVEMENT SCHEME
+				Vector3 movementVector = goalLocation-transform.position;
+				
+				movementVector.Normalize();
+				
+				movementVector*=speed*Time.deltaTime*4;
+				//transform.position=Vector3.Lerp(transform.position,goalLocation,Time.deltaTime*speed);
+				Vector3 newPos =transform.position;
+				newPos+=movementVector;
+				
+				if(transform.position.x>newPos.x){
+					//Going right
+					//print("Getting right as true");
+					facingLeft=false;
+					animation.setAnimation("Right");
+					animation.run=true;
+				}
+				else if(transform.position.x<newPos.x){
+					//print("Getting left as true");
+					facingLeft=true;
+					animation.setAnimation("Left");
+					animation.run=true;
+				}
+				
+				transform.position=newPos;
+				
+				
 			}
 		}
 		
@@ -156,10 +180,13 @@ public class BausRegionOne : BasicEnemy {
 	void Lazaring(){
 		if(goalLocation==Vector3.zero){
 			goalLocation=FindClosestPlayer(rangeOfSight).transform.position;
+			
+			//Gotta be a bit higher than the player
+			goalLocation.y=12.4f;
 		}
 		else{
 			Vector3 differenceToGoal = goalLocation-transform.position;
-			if(differenceToGoal.magnitude<1){
+			if(differenceToGoal.magnitude<4){
 				//Punch time
 				LazarShoot();
 				
@@ -167,7 +194,30 @@ public class BausRegionOne : BasicEnemy {
 				stateCounter--;
 			}
 			else{
-				transform.position=Vector3.Lerp(transform.position,goalLocation,Time.deltaTime*speed);
+				Vector3 movementVector = goalLocation-transform.position;
+				
+				movementVector.Normalize();
+				
+				movementVector*=speed*Time.deltaTime*4;
+				//transform.position=Vector3.Lerp(transform.position,goalLocation,Time.deltaTime*speed);
+				Vector3 newPos =transform.position;
+				newPos+=movementVector;
+				
+				if(transform.position.x>newPos.x){
+					//Going right
+					//print("Getting right as true");
+					facingLeft=false;
+					animation.setAnimation("Right");
+					animation.run=true;
+				}
+				else if(transform.position.x<newPos.x){
+					//print("Getting left as true");
+					facingLeft=true;
+					animation.setAnimation("Left");
+					animation.run=true;
+				}
+				transform.position=newPos;
+				//transform.position=Vector3.Lerp(transform.position,goalLocation,Time.deltaTime*speed);
 			}
 		}
 	}
@@ -180,12 +230,14 @@ public class BausRegionOne : BasicEnemy {
 			GameObject player = FindClosestPlayer(rangeOfSight);
 			if(player!=null){
 				goalLocation= player.transform.position;
+				//Gotta be a bit higher than the player
+				goalLocation.y=12.4f;
 			}
 		}
 		else{
 			//print("RUSHING");
 			Vector3 differenceToGoal = goalLocation-transform.position;
-			if(differenceToGoal.magnitude<1){
+			if(differenceToGoal.magnitude<3){
 				//Gone far enough
 				goalLocation=Vector3.zero;
 				stateCounter--;
@@ -193,7 +245,30 @@ public class BausRegionOne : BasicEnemy {
 				
 			}
 			else{
-				transform.position=Vector3.Lerp(transform.position,goalLocation,Time.deltaTime*speed*2);
+				Vector3 movementVector = goalLocation-transform.position;
+				
+				movementVector.Normalize();
+				
+				movementVector*=speed*Time.deltaTime*8;
+				//transform.position=Vector3.Lerp(transform.position,goalLocation,Time.deltaTime*speed);
+				Vector3 newPos =transform.position;
+				newPos+=movementVector;
+				
+				if(transform.position.x>newPos.x){
+					//Going right
+					//print("Getting right as true");
+					facingLeft=false;
+					animation.setAnimation("RushRight");
+					animation.run=true;
+				}
+				else if(transform.position.x<newPos.x){
+					//print("Getting left as true");
+					facingLeft=true;
+					animation.setAnimation("RushLeft");
+					animation.run=true;
+				}
+				transform.position=newPos;
+				//transform.position=Vector3.Lerp(transform.position,goalLocation,Time.deltaTime*speed*2);
 			}
 		}
 		
@@ -202,24 +277,38 @@ public class BausRegionOne : BasicEnemy {
 	void Punch(){
 		//Goal is on the right
 		if(transform.position.x<goalLocation.x){
-			animation.setAnimation("StrikeRight");
-			Vector3 spawnPos = transform.position;
-			spawnPos.z=transform.position.z;
-			spawnPos.x+=0.5f;
-					
-			Projectile proj = Network.Instantiate(punchProjectile,spawnPos,transform.rotation,1) as Projectile;
-			proj.shoot(false,speedOfPunch,rangeOfPunch);
-			audio.PlayOneShot(strike);
+			if(animation.currSpriteSheet!="StrikeRight"){
+				animation.setAnimation("StrikeRight", false);
+			}
+			if(animation.stopped){
+				Vector3 spawnPos = transform.position;
+				spawnPos.z=transform.position.z;
+				spawnPos.x+=0.5f;
+						
+				Projectile proj = Network.Instantiate(punchProjectile,spawnPos,transform.rotation,1) as Projectile;
+				proj.shoot(false,speedOfPunch,rangeOfPunch);
+				audio.PlayOneShot(strike);
+				goalLocation=Vector3.zero;
+				stateCounter--;
+				animation.setAnimation(animation.prevSpriteSheet);
+			}
 		}
 		else{
-			animation.setAnimation("StrikeLeft");
-			Vector3 spawnPos = transform.position;
-			spawnPos.z=transform.position.z;
-			spawnPos.x-=0.5f;
-					
-			Projectile proj = Network.Instantiate(punchProjectile,spawnPos,transform.rotation,1) as Projectile;
-			proj.shoot(true,speedOfPunch,rangeOfPunch);
-			audio.PlayOneShot(strike);
+			if(animation.currSpriteSheet!="StrikeLeft"){
+				animation.setAnimation("StrikeLeft",false);
+			}
+			if(animation.stopped){
+				Vector3 spawnPos = transform.position;
+				spawnPos.z=transform.position.z;
+				spawnPos.x-=0.5f;
+						
+				Projectile proj = Network.Instantiate(punchProjectile,spawnPos,transform.rotation,1) as Projectile;
+				proj.shoot(true,speedOfPunch,rangeOfPunch);
+				audio.PlayOneShot(strike);
+				goalLocation=Vector3.zero;
+				stateCounter--;
+				animation.setAnimation(animation.prevSpriteSheet);
+			}
 		}
 	}
 	
@@ -228,23 +317,28 @@ public class BausRegionOne : BasicEnemy {
 	
 	//Lazar will go in both directions
 	void LazarShoot(){
-		animation.setAnimation("Lazer");
+		if(animation.currSpriteSheet!="Prelazer"){
+			animation.setAnimation("Prelazer", false);
+		}
 		//Instantiate both parts
 		//One on left
 		
-		Vector3 leftPos = transform.position;
-		leftPos.x=transform.position.x-lazar.transform.localScale.x/2-lazar.gameObject.transform.localScale.x/2;
-		Projectile proj = Network.Instantiate(lazar,leftPos,lazar.transform.rotation,1) as Projectile;
-		proj.shoot(true,speedOfLazar,rangeOfLazar);
-		
-		//One on right
-		Vector3 rightPos = transform.position;
-		rightPos.x=transform.position.x+lazar.transform.localScale.x/2+lazar.gameObject.transform.localScale.x/2;
-		
-		Projectile proj2 = Network.Instantiate(lazar,rightPos,lazar.transform.rotation,1) as Projectile;
-		proj2.shoot(true,speedOfLazar,rangeOfLazar);
-		audio.PlayOneShot(strike);
-		wait(speedOfLazar);
+		if(animation.stopped){
+			animation.setAnimation("Lazer");
+			Vector3 leftPos = transform.position;
+			leftPos.x=transform.position.x-lazar.transform.localScale.x/2-lazar.gameObject.transform.localScale.x/2;
+			Projectile proj = Network.Instantiate(lazar,leftPos,lazar.transform.rotation,1) as Projectile;
+			proj.shoot(true,speedOfLazar,rangeOfLazar);
+			
+			//One on right
+			Vector3 rightPos = transform.position;
+			rightPos.x=transform.position.x+lazar.transform.localScale.x/2+lazar.gameObject.transform.localScale.x/2;
+			
+			Projectile proj2 = Network.Instantiate(lazar,rightPos,lazar.transform.rotation,1) as Projectile;
+			proj2.shoot(true,speedOfLazar,rangeOfLazar);
+			audio.PlayOneShot(strike);
+			wait(speedOfLazar);
+		}
 		
 		
 	}
@@ -269,6 +363,8 @@ public class BausRegionOne : BasicEnemy {
 			}
 		}
 	}
+	
+	
 	
 	public void applyDamage(int amount) {
 		//print ("test2");

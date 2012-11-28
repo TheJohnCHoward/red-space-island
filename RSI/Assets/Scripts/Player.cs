@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
 	public float punchTimer=0.0f;
 	public float redTimer=0.0f;
 	
-	public AudioClip hurt;
+	public AudioClip hurt, powerup;
 	
 	// Use this for initialization
 	void Start () {
@@ -115,6 +115,10 @@ public class Player : MonoBehaviour {
 			redTimer=0.1f;
 		}
 		
+	}
+	//POWERUP GOT
+	public void powerupPlay(){
+		audio.PlayOneShot(powerup);
 	}
 	
 	[RPC]

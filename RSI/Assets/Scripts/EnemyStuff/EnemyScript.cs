@@ -182,7 +182,7 @@ public class EnemyScript : BasicEnemy {
 	}
 	
 	
-	//Should the bullet
+	//Shoot the bullet
 	private void fireWeapon(GameObject player){
 		//Player on right
 		//Seperating them as later we might want to specify a start position based on which side it is
@@ -207,7 +207,7 @@ public class EnemyScript : BasicEnemy {
 		}
 		else{
 			Vector3 spawnPos = transform.position;
-			spawnPos.z=player.transform.position.z;
+			//spawnPos.z=player.transform.position.z;
 			spawnPos.x-=0.5f;
 			
 			Projectile proj = Instantiate(projectile,spawnPos,projectile.transform.rotation) as Projectile;
@@ -229,10 +229,10 @@ public class EnemyScript : BasicEnemy {
 			if(val>0.7 && val<0.9){
 				Network.Instantiate(healthPowerup,transform.position,healthPowerup.transform.rotation,1);
 			}
-			else if(val>0.9 && val<0.95){
+			else if(val>0.90 && val<0.96){
 				Network.Instantiate(speedPowerup,transform.position,speedPowerup.transform.rotation,1);
 			}
-			else if(val>0.95){
+			else if(val>0.96){
 				Network.Instantiate(powerPowerup,transform.position,powerPowerup.transform.rotation,1);
 			}
 			

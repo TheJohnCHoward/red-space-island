@@ -4,7 +4,7 @@ using System.Collections;
 public class Movement : MonoBehaviour {
 	// player speed
 	public float speed = 4;
-	public float bounds = 6;
+	private float bounds = 10;
 	public float zMax = 13;
 	public float zMin = 0;
 	public bool fixedCamera;
