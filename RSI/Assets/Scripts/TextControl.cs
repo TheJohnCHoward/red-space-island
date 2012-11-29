@@ -2,11 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 public class TextControl : MonoBehaviour {
-	
 	public GameObject core;
 	public GameObject storyText;
 	public GUITexture background;
-	public GUIText start, story, credits, back;
+	public GUIText start, story, credits, back, esc;
 	public bool isStory;
 	public bool isCredits;
 	public bool isBack;
@@ -16,6 +15,7 @@ public class TextControl : MonoBehaviour {
 	public Texture creditsTexture;
 	public GameObject creditsScreen;
 	private Object storyObject;
+	
 	
 	void OnMouseEnter() {
 		//change the color of the text
@@ -37,8 +37,10 @@ public class TextControl : MonoBehaviour {
 			mainCamera.backgroundColor = Color.black;
 			storyObject = Instantiate (storyText);
 			time = Time.time;
+			esc.enabled=true;
 			storyWait = true;
 		} else if (isCredits) {
+			esc.enabled=false;
 			background.enabled = false;
 			creditsScreen.guiTexture.enabled = true;
 			credits.enabled = false;
@@ -46,6 +48,7 @@ public class TextControl : MonoBehaviour {
 			story.enabled = false;
 			back.enabled = true;
 		} else if (isBack) {
+			esc.enabled=false;
 			creditsScreen.guiTexture.enabled = false;
 			background.enabled = true;
 			back.enabled = false;
@@ -53,6 +56,7 @@ public class TextControl : MonoBehaviour {
 			start.enabled = true;
 			story.enabled = true;
 		} else {
+			esc.enabled=false;
 			((NetworkHandler) core.GetComponent("NetworkHandler")).showNetworkInterface = true;
 			background.enabled = false;
 			start.enabled = false;
@@ -69,6 +73,7 @@ public class TextControl : MonoBehaviour {
 		if (storyWait) {
 			if (Time.time - time > 35 || Input.GetKeyDown (KeyCode.Escape)) {
 				background.enabled = true;
+				esc.enabled=false;
 				start.enabled = true;
 				story.enabled = true;
 				credits.enabled = true;

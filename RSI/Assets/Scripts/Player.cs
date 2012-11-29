@@ -39,53 +39,63 @@ public class Player : MonoBehaviour {
 			redTimer=-20;
 		}
 		
-		if(Input.GetAxis("Horizontal")==-1 || Input.GetKeyDown(KeyCode.LeftArrow)){
-			if(animation.looping ||(!animation.looping && animation.stopped)){
-				animation.setAnimation("Left");
-				animation.run=true;
-			}
-			((BoxCollider) collider).center = new Vector3(-1, 0, 0);
-			facingRight=false;
-		}
-		else if(Input.GetAxis("Horizontal") == 1 || Input.GetKeyDown(KeyCode.RightArrow)){
-			if(animation.looping ||(!animation.looping && animation.stopped)){
-				animation.setAnimation("Right");
-				animation.run=true;
-			}
-			facingRight=true;
-			((BoxCollider) collider).center = new Vector3(1, 0, 0);
-		}
-		else if(Input.GetButtonDown("Vertical")|| Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)){
-			animation.run=true;
-		}
-		else{
-			//if(punchTimer<0.0f){
-			if(animation.looping){
-				if(facingRight){
-					animation.setAnimation("Right");
-				}
-				else{
-					animation.setAnimation("Left");
-				}
-			
-			
-				animation.run=false;
-			}
-			else{
-				animation.run=true;
-			}
-		}
 		
-		if(Input.GetButtonDown("Light") || Input.GetKeyDown(KeyCode.J)){
-			
-			if(facingRight){
-				animation.setAnimation("PunchRight", false);
+		
+		//ANIMATION STUFF
+		
+		if(networkView.isMine){
+			if(Input.GetAxis("Horizontal")==-1 || Input.GetKeyDown(KeyCode.LeftArrow)){
+				if(animation.looping ||(!animation.looping && animation.stopped)){
+					animation.setAnimation("Left");
+					animation.run=true;
+				}
+				((BoxCollider) collider).center = new Vector3(-1, 0, 0);
+				facingRight=false;
+			}
+			else if(Input.GetAxis("Horizontal") == 1 || Input.GetKeyDown(KeyCode.RightArrow)){
+				if(animation.looping ||(!animation.looping && animation.stopped)){
+					animation.setAnimation("Right");
+					animation.run=true;
+				}
+				facingRight=true;
+				((BoxCollider) collider).center = new Vector3(1, 0, 0);
+			}
+			else if(Input.GetButtonDown("Vertical")|| Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)){
+				animation.run=true;
 			}
 			else{
-				animation.setAnimation("PunchLeft", false);
+				
+				//if(punchTimer<0.0f){
+					if(animation.looping){
+						if(facingRight){
+							animation.setAnimation("Right");
+						}
+						else{
+							animation.setAnimation("Left");
+						}
+					
+					
+						animation.run=false;
+					}
+					else{
+						animation.run=true;
+					}
+				
 			}
-			animation.run=true;
-			punchTimer=0.1f;
+			
+			if(Input.GetButtonDown("Light") || Input.GetKeyDown(KeyCode.J)){
+				
+					if(facingRight){
+						animation.setAnimation("PunchRight", false);
+					}
+					else{
+						animation.setAnimation("PunchLeft", false);
+					}
+					animation.run=true;
+					punchTimer=0.1f;
+				
+			}
+		
 		}
 		
 	}
@@ -96,9 +106,11 @@ public class Player : MonoBehaviour {
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
 			audio.PlayOneShot(hurt);
 			health-= proj.damageAmount;
-			MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
-			mesh.material.color= new Color(0.8f,0.1f,0.1f,1.0f);
-			redTimer=0.1f;
+			if(networkView.isMine){
+				MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
+				mesh.material.color= new Color(0.8f,0.1f,0.1f,1.0f);
+				redTimer=0.1f;
+			}
 		}
 		
 		
@@ -110,9 +122,11 @@ public class Player : MonoBehaviour {
 			Projectile proj = other.transform.gameObject.GetComponent("Projectile") as Projectile;
 			audio.PlayOneShot(hurt);
 			health-= proj.damageAmount;
-			MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
-			mesh.material.color= new Color(0.8f,0.1f,0.1f,1.0f);
-			redTimer=0.1f;
+			if(networkView.isMine){
+				MeshRenderer mesh = animation.GetComponent("MeshRenderer") as MeshRenderer;
+				mesh.material.color= new Color(0.8f,0.1f,0.1f,1.0f);
+				redTimer=0.1f;
+			}
 		}
 		
 	}
