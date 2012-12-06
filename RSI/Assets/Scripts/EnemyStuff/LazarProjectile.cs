@@ -25,8 +25,17 @@ public class LazarProjectile : Projectile {
 		if(other.tag=="Player"){
 			Player p = other.gameObject.GetComponent("Player") as Player;
 			if(doDamage){
-				p.health-=damage;
+				if(p!=null){
+					p.health-=damage;
+				}
+				else{
+					Player2 p2 = other.gameObject.GetComponent("Player2") as Player2;
+					if(p2!=null){
+						p2.health-=damage;
+					}
+				}
 			}
+			
 			
 			doDamage=!doDamage;
 		}
@@ -37,7 +46,15 @@ public class LazarProjectile : Projectile {
 			Player p = other.gameObject.GetComponent("Player") as Player;
 			
 			if(doDamage){
-				p.health-=damage;	
+				if(p!=null){
+					p.health-=damage;
+				}
+				else{
+					Player2 p2 = other.gameObject.GetComponent("Player2") as Player2;
+					if(p2!=null){
+						p2.health-=damage;
+					}
+				}	
 			}
 			doDamage=!doDamage;
 		}
@@ -52,7 +69,7 @@ public class LazarProjectile : Projectile {
 			renderer.material.color= Color.Lerp(renderer.material.color,Color.red,Time.deltaTime*4);
 		}
 		else{
-			Network.Destroy(gameObject);
+			Destroy(gameObject);
 		}
 	}
 }

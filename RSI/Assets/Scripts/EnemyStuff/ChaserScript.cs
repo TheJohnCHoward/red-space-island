@@ -248,16 +248,16 @@ public class ChaserScript : BasicEnemy {
 			float val = Random.Range(0.0f,1.0f);
 			
 			if(val>0.7 && val<0.8){
-				Network.Instantiate(healthPowerup,transform.position,healthPowerup.transform.rotation,1);
+				Instantiate(healthPowerup,transform.position,healthPowerup.transform.rotation);
 			}
 			else if(val>0.8 && val<0.9){
-				Network.Instantiate(speedPowerup,transform.position,speedPowerup.transform.rotation,1);
+				Instantiate(speedPowerup,transform.position,speedPowerup.transform.rotation);
 			}
 			else if(val>0.9){
-				Network.Instantiate(powerPowerup,transform.position,powerPowerup.transform.rotation,1);
+				Instantiate(powerPowerup,transform.position,powerPowerup.transform.rotation);
 			}
 			
-			Network.Destroy (gameObject);
+			Destroy (gameObject);
 		}
 	}
 	

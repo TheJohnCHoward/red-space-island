@@ -1,17 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Movement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerAmountSelect.cs">
     <Files>
-      <File FileName="Assets/Scripts/Player.cs" Line="51" Column="6" />
-      <File FileName="Assets/Scripts/EnemyStuff/BausRegionOne.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyStuff/BausAnimationManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyStuff/LazarProjectile.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Powerups/HealthPowerup.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Powerups/Powerup.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyStuff/EnemyScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LevelEnd.cs" Line="27" Column="20" />
-      <File FileName="Assets/Scripts/TextControl.cs" Line="76" Column="23" />
-      <File FileName="Assets/Scripts/Movement.cs" Line="7" Column="26" />
+      <File FileName="Assets/Scripts/Movement2.cs" Line="41" Column="7" />
+      <File FileName="Assets/Scripts/Movement.cs" Line="34" Column="21" />
+      <File FileName="Assets/Scripts/CameraMovement.cs" Line="72" Column="6" />
+      <File FileName="Assets/Scripts/EnemyStuff/EnemySpawnPoint.cs" Line="39" Column="30" />
+      <File FileName="Assets/Scripts/PlayerAmountSelect.cs" Line="51" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

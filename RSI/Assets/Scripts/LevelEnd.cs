@@ -17,20 +17,22 @@ public class LevelEnd : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Player") {
 			if (!lastLevel) {
-				networkView.RPC ("LoadLevel", RPCMode.AllBuffered, Application.loadedLevel + 1);
+				Application.LoadLevel(Application.loadedLevel+1);
+				//networkView.RPC ("LoadLevel", RPCMode.AllBuffered, Application.loadedLevel + 1);
 			} else {
 				// load win screen
-				networkView.RPC ("LoadLevel", RPCMode.AllBuffered, 1);
+				Application.LoadLevel("Win");
 			}
 		}
 	}
 	void OnTriggerStay(Collider other) {
 		if (other.tag == "Player") {
 			if (!lastLevel) {
-				networkView.RPC ("LoadLevel", RPCMode.AllBuffered, Application.loadedLevel + 1);
+				Application.LoadLevel(Application.loadedLevel+1);
+				//networkView.RPC ("LoadLevel", RPCMode.AllBuffered, Application.loadedLevel + 1);
 			} else {
 				// load win screen
-				networkView.RPC ("LoadLevel", RPCMode.AllBuffered, 1);
+				Application.LoadLevel("Win");
 			}
 		}
 	}

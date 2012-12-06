@@ -17,13 +17,15 @@ public class Movement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float xTranslation = Input.GetAxis("Horizontal") * speed;
-		float zTranslation = Input.GetAxis("Vertical") * speed;
+		float zTranslation = Input.GetAxis("Vertical") * speed*2;
 		xTranslation *= Time.deltaTime;
 		zTranslation *= Time.deltaTime;
 		if (transform.position.x - mainCamera.position.x <= -bounds && xTranslation < 0) {
+			//print("Got here");
 			xTranslation = 0;
 		}
-		if (fixedCamera && transform.position.x - mainCamera.position.x >= bounds - .1 && xTranslation > 0) {
+		if ( transform.position.x - mainCamera.position.x >= bounds - .1  && xTranslation > 0) {
+			//print("Got to positive side");
 			xTranslation = 0;
 		}
 		if (transform.position.z >= zMax && zTranslation > 0) {

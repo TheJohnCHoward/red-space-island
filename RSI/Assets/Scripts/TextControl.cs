@@ -57,7 +57,8 @@ public class TextControl : MonoBehaviour {
 			story.enabled = true;
 		} else {
 			esc.enabled=false;
-			((NetworkHandler) core.GetComponent("NetworkHandler")).showNetworkInterface = true;
+			Application.LoadLevel("PlayerSelect");
+			//((NetworkHandler) core.GetComponent("NetworkHandler")).showNetworkInterface = true;
 			background.enabled = false;
 			start.enabled = false;
 			story.enabled = false;

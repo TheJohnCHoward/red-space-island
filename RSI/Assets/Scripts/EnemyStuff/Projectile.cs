@@ -47,14 +47,15 @@ public class Projectile : MonoBehaviour {
 	
 	public virtual void OnCollisionEnter(Collision other){
 		
-		if(other.transform.tag=="Player"){
 			Destroy(gameObject);
-		}
+		
 	}
 	
-	
-	
-	
+	public virtual void OnTriggerEnter(Collider other){
+		
+			Destroy(gameObject);
+		
+	}
 	
 	
 }

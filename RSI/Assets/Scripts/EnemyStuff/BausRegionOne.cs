@@ -31,7 +31,7 @@ public class BausRegionOne : BasicEnemy {
 	public BausAnimationManager animation;
 	Vector3 prevPos;
 	bool facingLeft=false;
-	public AudioClip hurt, strike;
+	public AudioClip hurt, strike, rumbling;
 	public float redTimer=-20;
 	
 	// Update is called once per frame
@@ -102,7 +102,12 @@ public class BausRegionOne : BasicEnemy {
 			audio.loop=false;
 		}
 		else{
-			audio.loop=true;
+			if(!audio.isPlaying){
+				//print("Getting to here at all?");
+				audio.clip=rumbling;
+				audio.loop=true;
+				audio.Play();
+			}
 		}
 		
 		
@@ -285,7 +290,7 @@ public class BausRegionOne : BasicEnemy {
 				spawnPos.z=transform.position.z;
 				spawnPos.x+=0.5f;
 						
-				Projectile proj = Network.Instantiate(punchProjectile,spawnPos,transform.rotation,1) as Projectile;
+				Projectile proj = Instantiate(punchProjectile,spawnPos,transform.rotation) as Projectile;
 				proj.shoot(false,speedOfPunch,rangeOfPunch);
 				audio.PlayOneShot(strike);
 				goalLocation=Vector3.zero;
@@ -302,7 +307,7 @@ public class BausRegionOne : BasicEnemy {
 				spawnPos.z=transform.position.z;
 				spawnPos.x-=0.5f;
 						
-				Projectile proj = Network.Instantiate(punchProjectile,spawnPos,transform.rotation,1) as Projectile;
+				Projectile proj = Instantiate(punchProjectile,spawnPos,transform.rotation) as Projectile;
 				proj.shoot(true,speedOfPunch,rangeOfPunch);
 				audio.PlayOneShot(strike);
 				goalLocation=Vector3.zero;
@@ -327,14 +332,14 @@ public class BausRegionOne : BasicEnemy {
 			animation.setAnimation("Lazer");
 			Vector3 leftPos = transform.position;
 			leftPos.x=transform.position.x-lazar.transform.localScale.x/2-lazar.gameObject.transform.localScale.x/2;
-			Projectile proj = Network.Instantiate(lazar,leftPos,lazar.transform.rotation,1) as Projectile;
+			Projectile proj = Instantiate(lazar,leftPos,lazar.transform.rotation) as Projectile;
 			proj.shoot(true,speedOfLazar,rangeOfLazar);
 			
 			//One on right
 			Vector3 rightPos = transform.position;
 			rightPos.x=transform.position.x+lazar.transform.localScale.x/2+lazar.gameObject.transform.localScale.x/2;
 			
-			Projectile proj2 = Network.Instantiate(lazar,rightPos,lazar.transform.rotation,1) as Projectile;
+			Projectile proj2 = Instantiate(lazar,rightPos,lazar.transform.rotation) as Projectile;
 			proj2.shoot(true,speedOfLazar,rangeOfLazar);
 			audio.PlayOneShot(strike);
 			wait(speedOfLazar);
@@ -348,9 +353,17 @@ public class BausRegionOne : BasicEnemy {
 			if(other.tag=="Player"){
 				print("Hit playert");
 				Player playah = other.gameObject.GetComponent("Player") as Player;
-				audio.PlayOneShot(strike);
-				playah.health-=jumpDamage;
+				if(playah!=null){
+					audio.PlayOneShot(strike);
+					playah.health-=jumpDamage;
+				}
+				else{
+					Player2 playah2 = other.gameObject.GetComponent("Player2") as Player2;
+					audio.PlayOneShot(strike);
+					playah2.health-=jumpDamage;
+				}
 			}
+				
 		}
 	}
 	void OnCollisionEnter(Collision other){
@@ -358,8 +371,15 @@ public class BausRegionOne : BasicEnemy {
 			if(other.gameObject.tag=="Player"){
 				print("Hit playerxc");
 				Player playah = other.gameObject.GetComponent("Player") as Player;
-				audio.PlayOneShot(strike);
-				playah.health-=jumpDamage;
+				if(playah!=null){
+					audio.PlayOneShot(strike);
+					playah.health-=jumpDamage;
+				}
+				else{
+					Player2 playah2 = other.gameObject.GetComponent("Player2") as Player2;
+					audio.PlayOneShot(strike);
+					playah2.health-=jumpDamage;
+				}
 			}
 		}
 	}
@@ -386,10 +406,15 @@ public class BausRegionOne : BasicEnemy {
 					if(mvmt!=null){
 						mvmt.fixedCamera=false;
 					}
+					Movement2 mvmt2 = player.GetComponent("Movement2") as Movement2;
+					
+					if(mvmt2!=null){
+						mvmt2.fixedCamera=false;
+					}
 				}
 			}
 			
-			Network.Destroy (gameObject);
+			Destroy (gameObject);
 		}
 	}
 }

@@ -21,9 +21,9 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (health <= 0) {
-			Network.Destroy (this.gameObject);
+			Destroy (this.gameObject);
 			if (GameObject.FindGameObjectsWithTag("Player").Length - 1 == 0) {
-				networkView.RPC ("LoadLevel", RPCMode.AllBuffered, 2);
+				Application.LoadLevel("Lose");
 			} else {
 				//print ("test");
 			}
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour {
 		//ANIMATION STUFF
 		
 		if(networkView.isMine){
-			if(Input.GetAxis("Horizontal")==-1 || Input.GetKeyDown(KeyCode.LeftArrow)){
+			if( Input.GetKey(KeyCode.LeftArrow)){
 				if(animation.looping ||(!animation.looping && animation.stopped)){
 					animation.setAnimation("Left");
 					animation.run=true;
@@ -52,7 +52,7 @@ public class Player : MonoBehaviour {
 				((BoxCollider) collider).center = new Vector3(-1, 0, 0);
 				facingRight=false;
 			}
-			else if(Input.GetAxis("Horizontal") == 1 || Input.GetKeyDown(KeyCode.RightArrow)){
+			else if(Input.GetKey(KeyCode.RightArrow)){
 				if(animation.looping ||(!animation.looping && animation.stopped)){
 					animation.setAnimation("Right");
 					animation.run=true;
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour {
 				facingRight=true;
 				((BoxCollider) collider).center = new Vector3(1, 0, 0);
 			}
-			else if(Input.GetButtonDown("Vertical")|| Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)){
+			else if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)){
 				animation.run=true;
 			}
 			else{
@@ -137,11 +137,13 @@ public class Player : MonoBehaviour {
 	
 	[RPC]
 	void LoadLevel(int levelPrefix) {
+		/**
 		Network.SetSendingEnabled(0, false);
 		Network.isMessageQueueRunning = false;
 		Network.SetLevelPrefix(levelPrefix);
 		Application.LoadLevel(levelPrefix);
 		Network.SetSendingEnabled(0, true);
 		Network.isMessageQueueRunning = true;
+		*/
 	}
 }
